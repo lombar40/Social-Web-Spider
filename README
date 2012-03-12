@@ -1,0 +1,11 @@
+CS 473
+Social Web Spider
+
+Complete overhaul of user registration/profiles
+-Users can create accounts
+-Users can request login info and optinally reset password
+-Users can customize a profile which includes an avatar
+-Users can change their password
+
+MySQL database needed. Customize database info in database.properties file
+E-mail address login needed. E-mail me for the password or use your own.

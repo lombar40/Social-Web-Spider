@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show create="false" delete="false" id="ps_edu_unlv_cs_socialwebspider_domain_Profile" object="${profile}" path="/profiles" update="false" z="user-managed">
+        <c:if test="${profile.visibility}">
+            <div style="float: left; width: 20%;">
+                <img height="80" src="${profile.avatarURL}" width="80"/>
+	            Username:<br/>${profile.username}<br/>
+                <br/>
+	            Member Since:<br/>
+                <fmt:formatDate dateStyle="long" value="${user.activationDate}"/>
+                <c:if test="${empty user.activationDate}">
+	            	Not Activated
+	            </c:if>
+            </div>
+            <div style="float: right; width: 80%; word-wrap: break-word;">
+		    	Name:<br/>${profile.displayName}<br/>
+                <br/>
+		    	Email:<br/>${user.emailAddress}<br/>
+                <br/>
+		    	About Me:<br/>${profile.about}
+		    </div>
+        </c:if>
+        <c:if test="${!profile.visibility}">
+	    	Profile is private
+        </c:if>
+        <!-- 
+        <field:display field="username" id="s_edu_unlv_cs_socialwebspider_domain_Profile_username" object="${profile}" z="Sx2w45glXd2UAYMe/b+ZEnCe5w0="/>
+        <field:display field="displayName" id="s_edu_unlv_cs_socialwebspider_domain_Profile_displayName" object="${profile}" z="OFsQOLnceCbCpmbyWFVRD49wmX8="/>
+        <field:display field="visibility" id="s_edu_unlv_cs_socialwebspider_domain_Profile_visibility" object="${profile}" z="vHKAbtFsu+Z+1QlV5MQ18YawxSQ="/>
+        <field:display field="avatarURL" id="s_edu_unlv_cs_socialwebspider_domain_Profile_avatarURL" object="${profile}" z="1N4OJFaYrh5wpb3mbJnLgBWBOl0="/>
+        <field:display field="about" id="s_edu_unlv_cs_socialwebspider_domain_Profile_about" object="${profile}" z="OTNRXRk3cF0to/dPLPJej6N+ozc="/>
+        -->
+    </page:show>
+</div>

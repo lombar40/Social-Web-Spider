@@ -1,0 +1,65 @@
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2012-03-09 23:44:52
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2012-03-09 23:44:52
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2012-03-09 23:46:29
+hint
+project --topLevelPackage edu.unlv.cs.socialwebspider
+hint
+persistence setup --database MSSQL --provider HIBERNATE 
+persistence setup --database MYSQL --provider HIBERNATE 
+hint
+entity --class ~.domain.Profile
+// [failed] entity --class ~.domain.User
+entity --class ~.domain.User --permitReservedWords
+field string --fieldName username --notNull --unique --sizeMin 4 --sizeMax 20
+field string --fieldName password --notNull --sizeMin 4 --sizeMax 20
+field boolean --fieldName enabled
+field string --fieldName activationKey
+field date --fieldName activationDate --type java.util.Date
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2012-03-10 00:01:05
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2012-03-10 00:03:15
+hint
+focus --class edu.unlv.cs.socialwebspider.domain.Profile
+focus --class edu.unlv.cs.socialwebspider.domain.User
+field string --fieldName email --notNull
+focus --class edu.unlv.cs.socialwebspider.domain.Profile
+field string --fieldName displayName
+// [failed] field boolean --fieldName private
+// [failed] field boolean --fieldName public
+field boolean --fieldName visibility
+field string --fieldName avatarURL
+focus --class edu.unlv.cs.socialwebspider.domain.User
+field reference --fieldName profile --type edu.unlv.cs.socialwebspider.domain.Profile
+field string --fieldName authorities
+web mvc setup
+web mvc all --package ~.web
+security setup
+backup
+email sender setup --hostServer 127.0.0.1
+focus --class edu.unlv.cs.socialwebspider.domain.User
+finder list
+finder add --finderName findUsersByEmailAddress
+finder add --finderName findUsersByEmailAddress
+finder list
+finder add --finderName findUsersByActivationKeyAndEmailAddress
+focus --class edu.unlv.cs.socialwebspider.domain.Profile
+field string --fieldName username --notNull --unique
+hint
+focus --class edu.unlv.cs.socialwebspider.domain.User
+finder list
+finder add --finderName findUsersByUsername
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2012-03-10 02:44:42
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2012-03-10 12:32:43
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2012-03-10 14:02:39
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2012-03-10 21:39:59
+focus --class edu.unlv.cs.socialwebspider.domain.Profile
+field string --fieldName emailAddress --notNull 
+field string --fieldName about
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2012-03-10 22:20:04
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2012-03-11 13:44:31
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2012-03-11 13:52:12
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2012-03-11 13:54:19
+backup
+backup
+backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2012-03-11 20:00:11

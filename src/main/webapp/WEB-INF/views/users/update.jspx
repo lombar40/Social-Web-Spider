@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_edu_unlv_cs_socialwebspider_domain_User" modelAttribute="user" path="/users" versionField="Version" z="QaPC4u6xqgDZa1AoBorSkYcz2NE=">
+        <field:input field="username" id="c_edu_unlv_cs_socialwebspider_domain_User_username" min="1" required="true" z="hnsEKaqeSLAnoQr4wkmdtOZ4fFc="/>
+        <field:input field="password" id="c_edu_unlv_cs_socialwebspider_domain_User_password" min="1" required="true" z="fNwsAVObTsJV2sohI72mZOEnnfA="/>
+        <field:checkbox field="enabled" id="c_edu_unlv_cs_socialwebspider_domain_User_enabled" z="9WcPLokaGrbvItqcLktynmCoTgA="/>
+        <field:input field="activationKey" id="c_edu_unlv_cs_socialwebspider_domain_User_activationKey" z="MAsd5vaLrsf2kIoVAUzYh0tsadg="/>
+        <field:datetime dateTimePattern="${user_activationdate_date_format}" field="activationDate" id="c_edu_unlv_cs_socialwebspider_domain_User_activationDate" z="okutek9bqzPFLst91GiZU/Azhio="/>
+        <field:select field="profile" id="c_edu_unlv_cs_socialwebspider_domain_User_profile" itemValue="id" items="${profiles}" path="/profiles" z="wAchp9OK/iQ5gdKa3wlAJ9oc0Rw="/>
+        <field:input field="emailAddress" id="c_edu_unlv_cs_socialwebspider_domain_User_emailAddress" min="1" required="true" validationMessageCode="field_invalid_email" z="/v/L16KYtoI1sL5h/FM4ctR5WMA="/>
+        <field:checkbox field="admin" id="c_edu_unlv_cs_socialwebspider_domain_User_admin" z="EgP9sOpdWsFWoxRJsiwdxQD2WXY="/>
+    </form:update>
+</div>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_edu_unlv_cs_socialwebspider_domain_User" object="${user}" path="/users" z="mQvPKJsFM3Uw2j2MBbu3At9TLeQ=">
+        <field:display field="username" id="s_edu_unlv_cs_socialwebspider_domain_User_username" object="${user}" z="2jmh64b2TOMYQ/1bZDrZ7JvsN4Y="/>
+        <field:display field="password" id="s_edu_unlv_cs_socialwebspider_domain_User_password" object="${user}" z="jZIbxqtsJOl9+UawJ+d14UVlSuE="/>
+        <field:display field="enabled" id="s_edu_unlv_cs_socialwebspider_domain_User_enabled" object="${user}" z="yW/faWU/1VJ80Itvf2hkS/J2REY="/>
+        <field:display field="activationKey" id="s_edu_unlv_cs_socialwebspider_domain_User_activationKey" object="${user}" z="FXU3/hxLp+ff+snmJmg0JObKntg="/>
+        <field:display date="true" dateTimePattern="${user_activationdate_date_format}" field="activationDate" id="s_edu_unlv_cs_socialwebspider_domain_User_activationDate" object="${user}" z="kWPD0JNnwfMI0oV9DmVclw046tQ="/>
+        <field:display field="profile" id="s_edu_unlv_cs_socialwebspider_domain_User_profile" object="${user}" z="+Oh7NLlrez0zxFSMujukEOcbiwY="/>
+        <field:display field="emailAddress" id="s_edu_unlv_cs_socialwebspider_domain_User_emailAddress" object="${user}" z="qrOg0baS7g0OBd3vgyrEXnoG5VE="/>
+        <field:display field="admin" id="s_edu_unlv_cs_socialwebspider_domain_User_admin" object="${user}" z="4R1oFfpOudslFX0jqWPuuApqdDI="/>
+    </page:show>
+</div>

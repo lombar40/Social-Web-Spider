@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" 
+    xmlns:form="http://www.springframework.org/tags/form" 
+    xmlns:jsp="http://java.sun.com/JSP/Page" 
+    xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    
+  <jsp:output omit-xml-declaration="yes"/>
+  <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.SimpleTextarea');dojo.require('dijit.form.FilteringSelect');</script>
+  <div id="_title_div">
+    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: 'Forgot Login'}})); </script>
+    <form:form method="POST" commandName="forgotLoginForm">
+      <div id="forgotlogin_emailaddress">
+        <label for="_emailaddress_id">Email address:</label>
+        <form:input cssStyle="width:250px" id="_forgotlogin_emailaddress" maxlength="30" path="emailAddress"/>
+        <br/>
+        <form:errors cssClass="errors" path="emailAddress"/>
+      </div>
+      <br/>
+      <div id="forgotlogin_resetpassword">
+		<label for="_resetpassword_id">Reset password:</label>
+		<form:checkbox id="_forgotlogin_resetpassword" path="resetPassword" />
+      </div>
+      <br/><br/>
+      <div class="submit" id="forgotpassword_submit">
+        
+        <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId: 'proceed', event : 'onclick'}));</script>
+        <input id="proceed" type="submit" value="Save"/>
+      </div>
+      <br/>
+      <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+    </form:form>
+  </div>
+</div>
