@@ -3,20 +3,14 @@
 
 package edu.unlv.cs.socialwebspider.domain;
 
-import java.lang.String;
+import edu.unlv.cs.socialwebspider.domain.Profile;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 privileged aspect Profile_Roo_ToString {
     
     public String Profile.toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("About: ").append(getAbout()).append(", ");
-        sb.append("AvatarURL: ").append(getAvatarURL()).append(", ");
-        sb.append("DisplayName: ").append(getDisplayName()).append(", ");
-        sb.append("Id: ").append(getId()).append(", ");
-        sb.append("Username: ").append(getUsername()).append(", ");
-        sb.append("Version: ").append(getVersion()).append(", ");
-        sb.append("Visibility: ").append(getVisibility());
-        return sb.toString();
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
     
 }

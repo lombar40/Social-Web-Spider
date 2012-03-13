@@ -3,23 +3,14 @@
 
 package edu.unlv.cs.socialwebspider.domain;
 
-import java.lang.String;
+import edu.unlv.cs.socialwebspider.domain.User;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 privileged aspect User_Roo_ToString {
     
     public String User.toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("ActivationDate: ").append(getActivationDate()).append(", ");
-        sb.append("ActivationKey: ").append(getActivationKey()).append(", ");
-        sb.append("Admin: ").append(getAdmin()).append(", ");
-        sb.append("EmailAddress: ").append(getEmailAddress()).append(", ");
-        sb.append("Enabled: ").append(getEnabled()).append(", ");
-        sb.append("Id: ").append(getId()).append(", ");
-        sb.append("Password: ").append(getPassword()).append(", ");
-        sb.append("Profile: ").append(getProfile()).append(", ");
-        sb.append("Username: ").append(getUsername()).append(", ");
-        sb.append("Version: ").append(getVersion());
-        return sb.toString();
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
     
 }

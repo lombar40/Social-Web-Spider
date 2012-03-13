@@ -25,12 +25,5 @@
         <c:if test="${!profile.visibility}">
 	    	Profile is private
         </c:if>
-        <!-- 
-        <field:display field="username" id="s_edu_unlv_cs_socialwebspider_domain_Profile_username" object="${profile}" z="Sx2w45glXd2UAYMe/b+ZEnCe5w0="/>
-        <field:display field="displayName" id="s_edu_unlv_cs_socialwebspider_domain_Profile_displayName" object="${profile}" z="OFsQOLnceCbCpmbyWFVRD49wmX8="/>
-        <field:display field="visibility" id="s_edu_unlv_cs_socialwebspider_domain_Profile_visibility" object="${profile}" z="vHKAbtFsu+Z+1QlV5MQ18YawxSQ="/>
-        <field:display field="avatarURL" id="s_edu_unlv_cs_socialwebspider_domain_Profile_avatarURL" object="${profile}" z="1N4OJFaYrh5wpb3mbJnLgBWBOl0="/>
-        <field:display field="about" id="s_edu_unlv_cs_socialwebspider_domain_Profile_about" object="${profile}" z="OTNRXRk3cF0to/dPLPJej6N+ozc="/>
-        -->
     </page:show>
 </div>

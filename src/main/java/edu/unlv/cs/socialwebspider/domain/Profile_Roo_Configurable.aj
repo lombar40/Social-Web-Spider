@@ -3,6 +3,7 @@
 
 package edu.unlv.cs.socialwebspider.domain;
 
+import edu.unlv.cs.socialwebspider.domain.Profile;
 import org.springframework.beans.factory.annotation.Configurable;
 
 privileged aspect Profile_Roo_Configurable {

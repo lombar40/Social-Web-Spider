@@ -3,8 +3,7 @@
 
 package edu.unlv.cs.socialwebspider.domain;
 
-import java.lang.Boolean;
-import java.lang.String;
+import edu.unlv.cs.socialwebspider.domain.Profile;
 
 privileged aspect Profile_Roo_JavaBean {
     

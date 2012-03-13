@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:sec="http://www.springframework.org/security/tags" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:sec="http://www.springframework.org/security/tags" id="menu" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
-    	<sec:authorize access="isAuthenticated()">
-        <menu:category id="c_profile" z="7+DSGeUy45gwkQx/NptxyQe7XpY=">
-       		<sec:authorize access="hasRole('ROLE_ADMIN')">
-            <menu:item id="i_profile_new" messageCode="global_menu_new" url="/profiles?form" z="5CN+Gy9le00bCK9RJj72N/fBXsM="/>
-            </sec:authorize>
-            <menu:item id="i_profile_list" messageCode="global_menu_list" url="/profiles?page=1&amp;size=${empty param.size ? 10 : param.size}" z="Xn953x2DUSQIcljOjuowLDd1gRc="/>
-        </menu:category>
+        <sec:authorize access="isAuthenticated()">
+            <menu:category id="c_profile" z="7+DSGeUy45gwkQx/NptxyQe7XpY=">
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    <menu:item id="i_profile_new" messageCode="global_menu_new" url="/profiles?form" z="5CN+Gy9le00bCK9RJj72N/fBXsM="/>
+                </sec:authorize>
+                <menu:item id="i_profile_list" messageCode="global_menu_list" url="/profiles?page=1&amp;size=${empty param.size ? 10 : param.size}" z="Xn953x2DUSQIcljOjuowLDd1gRc="/>
+            </menu:category>
         </sec:authorize>
-        
         <sec:authorize access="hasRole('ROLE_ADMIN')">
-        <menu:category id="c_user" z="uoTSf/uIZ821ZppidzS9aO776yk=">
-            <menu:item id="i_user_new" messageCode="global_menu_new" url="/users?form" z="Zv1m8u2rG+JFKcvJ+AHVVK0ey24="/>
-            <menu:item id="i_user_list" messageCode="global_menu_list" url="/users?page=1&amp;size=${empty param.size ? 10 : param.size}" z="4MY4uybxa60Q1G2rlI5bOwg+sm0="/>
-            <menu:item id="fi_user_emailaddress" messageCode="global_menu_find" url="/users?find=ByEmailAddress&amp;form" z="zQpmROgoAt/F36huYhJLnYE4iTg="/>
-            <menu:item id="fi_user_activationkeyandemailaddress" messageCode="global_menu_find" url="/users?find=ByActivationKeyAndEmailAddress&amp;form" z="sxYtNfVYVlwvF2liAr8v80y25Q4="/>
-            <menu:item id="fi_user_username" messageCode="global_menu_find" url="/users?find=ByUsername&amp;form" z="Pt1/VjK2u7HtAhaNOJt4LC0yZR4="/>
-        </menu:category>
+            <menu:category id="c_user" z="uoTSf/uIZ821ZppidzS9aO776yk=">
+                <menu:item id="i_user_new" messageCode="global_menu_new" url="/users?form" z="Zv1m8u2rG+JFKcvJ+AHVVK0ey24="/>
+                <menu:item id="i_user_list" messageCode="global_menu_list" url="/users?page=1&amp;size=${empty param.size ? 10 : param.size}" z="4MY4uybxa60Q1G2rlI5bOwg+sm0="/>
+            </menu:category>
         </sec:authorize>
     </menu:menu>
 </div>

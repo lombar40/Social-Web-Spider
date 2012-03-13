@@ -4,7 +4,6 @@
 package edu.unlv.cs.socialwebspider.domain;
 
 import edu.unlv.cs.socialwebspider.domain.User;
-import java.lang.String;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 

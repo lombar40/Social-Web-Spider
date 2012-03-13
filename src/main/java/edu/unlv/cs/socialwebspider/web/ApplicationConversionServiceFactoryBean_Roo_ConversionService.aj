@@ -5,34 +5,75 @@ package edu.unlv.cs.socialwebspider.web;
 
 import edu.unlv.cs.socialwebspider.domain.Profile;
 import edu.unlv.cs.socialwebspider.domain.User;
-import java.lang.String;
+import edu.unlv.cs.socialwebspider.web.ApplicationConversionServiceFactoryBean;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
 
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
+    declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
+    
+    public Converter<Profile, String> ApplicationConversionServiceFactoryBean.getProfileToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<edu.unlv.cs.socialwebspider.domain.Profile, java.lang.String>() {
+            public String convert(Profile profile) {
+                return new StringBuilder().append(profile.getUsername()).append(" ").append(profile.getDisplayName()).append(" ").append(profile.getAvatarURL()).append(" ").append(profile.getAbout()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Profile> ApplicationConversionServiceFactoryBean.getIdToProfileConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, edu.unlv.cs.socialwebspider.domain.Profile>() {
+            public edu.unlv.cs.socialwebspider.domain.Profile convert(java.lang.Long id) {
+                return Profile.findProfile(id);
+            }
+        };
+    }
+    
+    public Converter<String, Profile> ApplicationConversionServiceFactoryBean.getStringToProfileConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, edu.unlv.cs.socialwebspider.domain.Profile>() {
+            public edu.unlv.cs.socialwebspider.domain.Profile convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Profile.class);
+            }
+        };
+    }
+    
+    public Converter<User, String> ApplicationConversionServiceFactoryBean.getUserToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<edu.unlv.cs.socialwebspider.domain.User, java.lang.String>() {
+            public String convert(User user) {
+                return new StringBuilder().append(user.getUsername()).append(" ").append(user.getPassword()).append(" ").append(user.getEmailAddress()).append(" ").append(user.getActivationKey()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, User> ApplicationConversionServiceFactoryBean.getIdToUserConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, edu.unlv.cs.socialwebspider.domain.User>() {
+            public edu.unlv.cs.socialwebspider.domain.User convert(java.lang.Long id) {
+                return User.findUser(id);
+            }
+        };
+    }
+    
+    public Converter<String, User> ApplicationConversionServiceFactoryBean.getStringToUserConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, edu.unlv.cs.socialwebspider.domain.User>() {
+            public edu.unlv.cs.socialwebspider.domain.User convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), User.class);
+            }
+        };
+    }
+    
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
-        registry.addConverter(new ProfileConverter());
-        registry.addConverter(new UserConverter());
+        registry.addConverter(getProfileToStringConverter());
+        registry.addConverter(getIdToProfileConverter());
+        registry.addConverter(getStringToProfileConverter());
+        registry.addConverter(getUserToStringConverter());
+        registry.addConverter(getIdToUserConverter());
+        registry.addConverter(getStringToUserConverter());
     }
     
     public void ApplicationConversionServiceFactoryBean.afterPropertiesSet() {
         super.afterPropertiesSet();
         installLabelConverters(getObject());
-    }
-    
-    static class edu.unlv.cs.socialwebspider.web.ApplicationConversionServiceFactoryBean.ProfileConverter implements Converter<Profile, String> {
-        public String convert(Profile profile) {
-            return new StringBuilder().append(profile.getUsername()).append(" ").append(profile.getDisplayName()).append(" ").append(profile.getAvatarURL()).append(" ").append(profile.getAbout()).toString();
-        }
-        
-    }
-    
-    static class edu.unlv.cs.socialwebspider.web.ApplicationConversionServiceFactoryBean.UserConverter implements Converter<User, String> {
-        public String convert(User user) {
-            return new StringBuilder().append(user.getUsername()).append(" ").append(user.getPassword()).append(" ").append(user.getEmailAddress()).append(" ").append(user.getActivationKey()).toString();
-        }
-        
     }
     
 }

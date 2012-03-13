@@ -4,12 +4,6 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_edu_unlv_cs_socialwebspider_domain_Profile" items="${profiles}" z="7tiu/qEIjkp1oy8XNgKcrMbqy3M=">
         <table:table create="false" data="${profiles}" delete="false" id="l_edu_unlv_cs_socialwebspider_domain_Profile" path="/profiles" update="false" z="user-managed">
-        	<!-- 
-            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Profile_displayName" property="displayName" z="4RLTrcDACDlWMzbvnkySC+mHW38="/>
-            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Profile_visibility" property="visibility" z="3BIlYPqMK6jnnH1TQ4uuNgFFF0Q="/>
-            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Profile_avatarURL" property="avatarURL" z="5+9zVt1phXtAhtzMNe+CqfByuys="/>
-            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Profile_about" property="about" z="lzKeD2vqLIrAC09qrPNfHJ8Hs8c="/>
-            -->
             <table:column id="c_edu_unlv_cs_socialwebspider_domain_Profile_username" property="username" z="ArI//re6z+B11YB+0StJFG4AUb4="/>
         </table:table>
     </page:list>

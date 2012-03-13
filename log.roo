@@ -63,3 +63,36 @@ backup
 backup
 backup
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2012-03-11 20:00:11
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2012-03-11 20:41:42
+version
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2012-03-11 21:29:42
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-12 19:22:00
+focus --class ~.domain.User
+finder add --finderName findUsersByEmailAddress
+// [failed] finder list 
+// [failed] entity jpa --class ~.domain.TestClass
+entity jpa --class ~.domain.Wasdg
+finder list 
+finder list
+field string --fieldName test
+finder list
+finder add findWasdgsByTest
+exit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-12 19:40:21
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-12 19:40:27
+exit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-12 19:42:46
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-12 19:42:52
+exit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-12 19:44:23
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-12 20:02:39
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-12 20:34:29
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-12 20:34:45
+exit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-12 20:55:46
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-12 20:55:58
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-12 20:59:23
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-12 21:27:49
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-12 21:35:48
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-12 21:38:32
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-12 21:41:27

@@ -1,18 +1,18 @@
 package edu.unlv.cs.socialwebspider.web;
 
-import org.springframework.format.FormatterRegistry;
+import java.util.Set;
+import org.springframework.format.FormatterRegistrar;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
-import org.springframework.roo.addon.web.mvc.controller.RooConversionService;
+import org.springframework.roo.addon.web.mvc.controller.converter.RooConversionService;
 
 /**
  * A central place to register application converters and formatters. 
  */
 @RooConversionService
 public class ApplicationConversionServiceFactoryBean extends FormattingConversionServiceFactoryBean {
-
+	
 	@Override
-	protected void installFormatters(FormatterRegistry registry) {
-		super.installFormatters(registry);
-		// Register application converters and formatters
-	}
+    public void setFormatterRegistrars(Set<FormatterRegistrar> formatterRegistrars) {
+        super.setFormatterRegistrars(formatterRegistrars);
+    }
 }

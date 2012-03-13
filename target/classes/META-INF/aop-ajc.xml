@@ -6,13 +6,14 @@
 <aspect name="edu.unlv.cs.socialwebspider.domain.Profile_Roo_JavaBean"/>
 <aspect name="edu.unlv.cs.socialwebspider.domain.User_Roo_Configurable"/>
 <aspect name="edu.unlv.cs.socialwebspider.web.ProfileController_Roo_Controller"/>
+<aspect name="edu.unlv.cs.socialwebspider.domain.Profile_Roo_Jpa_ActiveRecord"/>
 <aspect name="edu.unlv.cs.socialwebspider.domain.User_Roo_Finder"/>
 <aspect name="edu.unlv.cs.socialwebspider.domain.Profile_Roo_ToString"/>
-<aspect name="edu.unlv.cs.socialwebspider.domain.Profile_Roo_Entity"/>
+<aspect name="edu.unlv.cs.socialwebspider.domain.User_Roo_Jpa_Entity"/>
 <aspect name="edu.unlv.cs.socialwebspider.domain.Profile_Roo_Configurable"/>
 <aspect name="edu.unlv.cs.socialwebspider.domain.User_Roo_ToString"/>
-<aspect name="edu.unlv.cs.socialwebspider.web.UserController_Roo_Controller_Finder"/>
-<aspect name="edu.unlv.cs.socialwebspider.domain.User_Roo_Entity"/>
+<aspect name="edu.unlv.cs.socialwebspider.domain.User_Roo_Jpa_ActiveRecord"/>
+<aspect name="edu.unlv.cs.socialwebspider.domain.Profile_Roo_Jpa_Entity"/>
 </aspects>
 </aspectj>
 

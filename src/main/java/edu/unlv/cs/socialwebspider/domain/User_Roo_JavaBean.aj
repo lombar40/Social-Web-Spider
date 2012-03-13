@@ -4,8 +4,7 @@
 package edu.unlv.cs.socialwebspider.domain;
 
 import edu.unlv.cs.socialwebspider.domain.Profile;
-import java.lang.Boolean;
-import java.lang.String;
+import edu.unlv.cs.socialwebspider.domain.User;
 import java.util.Date;
 
 privileged aspect User_Roo_JavaBean {
