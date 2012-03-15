@@ -9,6 +9,6 @@
         <div style="display:none;">
             <field:input field="username" id="c_edu_unlv_cs_socialwebspider_domain_Profile_username" z="QTlEOzoMr+FAA7/eIza2WG+Xxb8="/>
         </div>
-        <field:input field="about" id="c_edu_unlv_cs_socialwebspider_domain_Profile_about" z="3kcSV7blFfulX8vteZesz8YQfkU="/>
+        <field:editor field="about" id="c_edu_unlv_cs_socialwebspider_domain_Profile_about" z="user-managed"/>
     </form:update>
 </div>

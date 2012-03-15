@@ -9,6 +9,8 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import edu.unlv.cs.socialwebspider.domain.Profile;
 import javax.persistence.ManyToOne;
@@ -16,7 +18,6 @@ import javax.persistence.ManyToOne;
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord(finders = { "findUsersByEmailAddress", "findUsersByActivationKeyAndEmailAddress", "findUsersByUsername" })
-//@RooEntity(finders = { "findUsersByEmailAddress", "findUsersByActivationKeyAndEmailAddress", "findUsersByUsername" })
 public class User {
 
     @NotNull
@@ -45,4 +46,17 @@ public class User {
     private Profile profile;		// Stores the user's customizable profile
 
     private Boolean admin;			// Stores the admin flag for the user
+    
+    public long getUserIdByUsername()
+    {
+    	TypedQuery<User> usernameQuery = User.findUsersByUsername(this.username);	// Sets up a query to check for existing username
+    	
+    	// If results is 0 user is either an admin or profile doesn't exist
+    	if(usernameQuery.getResultList().isEmpty())
+    		return -1L;
+    	
+    	// Return the user's ID
+    	User user = usernameQuery.getSingleResult();
+    	return user.getId();
+    }
 }

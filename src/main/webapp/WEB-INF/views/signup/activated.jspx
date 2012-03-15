@@ -1,11 +1,8 @@
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" 
-    xmlns:form="http://www.springframework.org/tags/form" 
-    xmlns:jsp="http://java.sun.com/JSP/Page" 
-    xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes"/>
-  <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.SimpleTextarea');dojo.require('dijit.form.FilteringSelect');</script>
-  <div id="_title_div">
-    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: 'Signup'}})); </script>
-   <h3>Your activation was successful. You may now <a href="/socialwebspider/login" style="font-size: 15px;line-height: 21px;color:#555;text-decoration: underline;">login.</a></h3>
-  </div>
+  <spring:message code="signup_title" var="title" htmlEscape="false" />
+  <util:panel id="title" title="${title}">
+   <h3>Your activation was successful. You may now <a href="/socialwebspider/login" style="font-size: 15px;line-height: 21px;text-decoration: underline;">login.</a></h3>
+  </util:panel>
 </div>

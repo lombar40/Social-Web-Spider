@@ -2,10 +2,32 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show create="false" delete="false" id="ps_edu_unlv_cs_socialwebspider_domain_Profile" object="${profile}" path="/profiles" update="false" z="user-managed">
-        <c:if test="${profile.visibility}">
+    <jsp:useBean id="userBean" class="edu.unlv.cs.socialwebspider.domain.User" scope="request"/>
+	<jsp:setProperty name="userBean" property="username" value="${pageContext.request.userPrincipal.name}"/>
+	<c:set var="userId" value="${userBean.getUserIdByUsername()}" />
+	<c:if test="${userId == profile.id}">
+		<c:set var="updateFlag" value="true" />
+		<c:set var="visibility" value="true" />
+	</c:if>
+	<c:if test="${userId == -1}">
+		<c:set var="updateFlag" value="true" />
+		<c:set var="visibility" value="true" />
+	</c:if>
+	<c:if test="${empty updateFlag}">
+		<c:set var="updateFlag" value="false" />
+	</c:if>
+	<c:if test="${empty visibility}">
+		<c:set var="visibility" value="${profile.visibility}" />
+	</c:if>
+    <page:show create="false" delete="false" id="ps_edu_unlv_cs_socialwebspider_domain_Profile" object="${profile}" path="/profiles" update="${updateFlag}" z="user-managed">
+        <c:if test="${visibility}">
             <div style="float: left; width: 20%;">
-                <img height="80" src="${profile.avatarURL}" width="80"/>
+            	<c:if test="${empty profile.avatarURL}">
+            		<img height="80" src="/socialwebspider/images/noavatar.jpg" width="80"/>
+            	</c:if>
+            	<c:if test="${not empty profile.avatarURL}">
+                	<img height="80" src="${profile.avatarURL}" width="80"/>
+                </c:if>
 	            Username:<br/>${profile.username}<br/>
                 <br/>
 	            Member Since:<br/>
@@ -22,8 +44,13 @@
 		    	About Me:<br/>${profile.about}
 		    </div>
         </c:if>
-        <c:if test="${!profile.visibility}">
-	    	Profile is private
+        <c:if test="${!visibility}">
+	    	${profile.username}'s profile is private
         </c:if>
+        <field:display field="username" id="s_edu_unlv_cs_socialwebspider_domain_Profile_username" object="${profile}" render="false" z="user-managed"/>
+        <field:display field="displayName" id="s_edu_unlv_cs_socialwebspider_domain_Profile_displayName" object="${profile}" render="false" z="user-managed"/>
+        <field:display field="visibility" id="s_edu_unlv_cs_socialwebspider_domain_Profile_visibility" object="${profile}" render="false" z="user-managed"/>
+        <field:display field="avatarURL" id="s_edu_unlv_cs_socialwebspider_domain_Profile_avatarURL" object="${profile}" render="false" z="user-managed"/>
+        <field:display field="about" id="s_edu_unlv_cs_socialwebspider_domain_Profile_about" object="${profile}" render="false" z="user-managed"/>
     </page:show>
 </div>

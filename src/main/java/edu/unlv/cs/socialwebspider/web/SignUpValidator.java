@@ -22,7 +22,7 @@ public class SignUpValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		SignUpForm form = (SignUpForm) target;		// Signup form
 		String password = form.getPassword();		// Stores password from signup form
-		String repeatPassword = form.getRepeatPassword();	// Stores repeated password from signup form
+		String repeatPassword = form.getPasswordRepeat();	// Stores repeated password from signup form
 		TypedQuery<User> usernameQuery = User.findUsersByUsername(form.getUsername());	// Sets up a query to check for existing username
 		TypedQuery<User> emailQuery = User.findUsersByEmailAddress(form.getEmailAddress());		// Sets up a query to check for existing email
 		List<User> results;
@@ -41,7 +41,7 @@ public class SignUpValidator implements Validator {
 
 		// Checks if the passwords provided match, returns an error if not
 		if (!password.equals(repeatPassword)) {
-			errors.rejectValue("repeatPassword", "signup_repeatpasswordnomatch");
+			errors.rejectValue("passwordRepeat", "signup_repeatpasswordnomatch");
 		}
 	}
 }

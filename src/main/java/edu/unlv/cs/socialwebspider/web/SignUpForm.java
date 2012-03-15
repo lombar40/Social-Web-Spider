@@ -15,7 +15,7 @@ public class SignUpForm {
 	
 	@NotNull
 	@Size(min = 1)
-	private String repeatPassword;	// Stores the repeated password
+	private String passwordRepeat;	// Stores the repeated password
 	
 	@NotNull
 	@Size(min = 1)
@@ -36,12 +36,12 @@ public class SignUpForm {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getRepeatPassword() {
-		return repeatPassword;
+	public String getPasswordRepeat() {
+		return passwordRepeat;
 	}
 	
-	public void setRepeatPassword(String repeatPassword) {
-		this.repeatPassword = repeatPassword;
+	public void setPasswordRepeat(String passwordRepeat) {
+		this.passwordRepeat = passwordRepeat;
 	}
 	
 	public String getEmailAddress() {

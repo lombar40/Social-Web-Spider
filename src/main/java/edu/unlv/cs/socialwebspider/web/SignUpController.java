@@ -53,17 +53,20 @@ public class SignUpController {
 	@RequestMapping(params = "activate", method = RequestMethod.GET)
 	public String activateUser(@RequestParam(value = "activate", required = true) String activationKey,@RequestParam(value = "emailAddress", required = true) String emailAddress,Model model) {
 		TypedQuery<User> query = User.findUsersByActivationKeyAndEmailAddress(activationKey, emailAddress);
-		User User = query.getSingleResult();
 		
-		if(User != null){
-			User.setActivationDate(new Date());
-			User.setEnabled(true);
-			User.merge();
-			return "signup/activated";
-		}
-		else{
+		// Check if the user/activation combination exists
+		if(query.getResultList().isEmpty() || query.getResultList().size() != 1)
 			return "signup/error";
-		}
+		
+		// Retrieve the user and check to make sure they aren't already activated
+		User user = query.getSingleResult();
+		if(user.getActivationDate() != null)
+			return "signup/error";
+
+		user.setActivationDate(new Date());		// Set activation date
+		user.setEnabled(true);					// Enable account
+		user.merge();							// Save
+		return "signup/activated";
 	}
 	
 	// Attempts creation of user with the supplied user details

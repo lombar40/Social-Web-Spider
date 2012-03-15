@@ -5,11 +5,12 @@
     <page:list id="pl_edu_unlv_cs_socialwebspider_domain_User" items="${users}" z="6M2W+d4sOjb9T9DcaskVJf1/Ea0=">
         <table:table data="${users}" id="l_edu_unlv_cs_socialwebspider_domain_User" path="/users" z="eM13xLRddR1olBR4YKo+1bwNCpo=">
             <table:column id="c_edu_unlv_cs_socialwebspider_domain_User_username" property="username" z="FqWygERAruoC907HPs0FAFWjTZ4="/>
-            <table:column id="c_edu_unlv_cs_socialwebspider_domain_User_password" property="password" z="3kF+ITOySaRAc5yEss+Y5cenLD8="/>
-            <table:column id="c_edu_unlv_cs_socialwebspider_domain_User_enabled" property="enabled" z="cqrwgxBQAb8KQ9zZu009lKdY/DQ="/>
-            <table:column id="c_edu_unlv_cs_socialwebspider_domain_User_activationKey" property="activationKey" z="uNkaAyfTRP3oYMqioDCEs+Sdn9c="/>
-            <table:column date="true" dateTimePattern="${user_activationdate_date_format}" id="c_edu_unlv_cs_socialwebspider_domain_User_activationDate" property="activationDate" z="mitro81m0/GWVtuUfRM91W+phHw="/>
             <table:column id="c_edu_unlv_cs_socialwebspider_domain_User_emailAddress" property="emailAddress" z="MzxvBTRvCodML41Z67i5J19sJpo="/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_User_password" property="password" render="false" z="user-managed"/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_User_enabled" property="enabled" z="cqrwgxBQAb8KQ9zZu009lKdY/DQ="/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_User_activationKey" property="activationKey" render="false" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${user_activationdate_date_format}" id="c_edu_unlv_cs_socialwebspider_domain_User_activationDate" property="activationDate" render="false" z="user-managed"/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_User_admin" property="admin" z=""/>
         </table:table>
     </page:list>
 </div>

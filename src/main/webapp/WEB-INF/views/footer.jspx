@@ -10,9 +10,29 @@
     </a>
   </span>
   <c:if test="${pageContext['request'].userPrincipal != null}">
+  	<jsp:useBean id="userBean" class="edu.unlv.cs.socialwebspider.domain.User" scope="request"/>
+	<jsp:setProperty name="userBean" property="username" value="${pageContext.request.userPrincipal.name}"/>
+	<c:set var="userId" value="${userBean.getUserIdByUsername()}" />
+	<c:if test="${userId != -1}">
+  	<c:out value=" | "/>
+    <span>
+      <spring:url value="/profiles/${userId}" var="viewprofile" />
+      <a href="${viewprofile}">
+        <spring:message code="footer_viewprofile"/>
+      </a>
+    </span>
     <c:out value=" | "/>
     <span>
-      <a href="/socialwebspider/changepassword">
+      <spring:url value="/profiles/${userId}?form" var="editprofile" />
+      <a href="${editprofile}">
+        <spring:message code="footer_editprofile"/>
+      </a>
+    </span>
+    </c:if>
+    <c:out value=" | "/>
+    <span>
+      <spring:url value="/changepassword" var="changepassword"/>
+      <a href="${changepassword}">
         <spring:message code="footer_changepassword"/>
       </a>
     </span>
@@ -27,13 +47,15 @@
   <c:if test="${pageContext['request'].userPrincipal == null}">
   	<c:out value=" | "/>
     <span>
-      <a href="/socialwebspider/signup">
+      <spring:url value="/signup" var="signup"/>
+      <a href="${signup}">
         <spring:message code="footer_signup"/>
       </a>
     </span>
     <c:out value=" | "/>
     <span>
-      <a href="/socialwebspider/forgotlogin">
+      <spring:url value="/forgotlogin" var="forgotlogin"/>
+      <a href="${forgotlogin}">
         <spring:message code="footer_forgotlogin"/>
       </a>
     </span>
