@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_edu_unlv_cs_socialwebspider_domain_Message" modelAttribute="message" path="/messages" render="${empty dependencies}" z="pxWZyYBQjZ5yHkTZ1nSV3omvngI=">
+        <field:input field="messageTo" id="c_edu_unlv_cs_socialwebspider_domain_Message_messageTo" required="true" z="1dXRXFH0kIL7Dfa3orgdxApcw28="/>
+        <field:input field="messageFrom" id="c_edu_unlv_cs_socialwebspider_domain_Message_messageFrom" render="false" required="true" z="user-managed"/>
+        <field:input field="subject" id="c_edu_unlv_cs_socialwebspider_domain_Message_subject" required="true" z="0SPLd53p5VbwhljNshlyMuEtl10="/>
+        <field:input field="contents" id="c_edu_unlv_cs_socialwebspider_domain_Message_contents" required="true" z="bsvkeh3LiNirv3IJhJRiYzG1DiY="/>
+        <field:select field="owner" id="c_edu_unlv_cs_socialwebspider_domain_Message_owner" itemValue="id" items="${users}" path="/users" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${message_messagedate_date_format}" field="messageDate" id="c_edu_unlv_cs_socialwebspider_domain_Message_messageDate" render="false" z="user-managed"/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_edu_unlv_cs_socialwebspider_domain_Message" render="${not empty dependencies}" z="gFnlGzf32n3Ot11/34rxfZ5wWfw="/>
+</div>

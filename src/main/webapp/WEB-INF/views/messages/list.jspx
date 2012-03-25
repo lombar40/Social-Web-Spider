@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_edu_unlv_cs_socialwebspider_domain_Message" items="${messages}" z="zjO0pjyfUTkOwOHYN/EfwrjKhJo=">
+        <table:table create="false" data="${messages}" id="l_edu_unlv_cs_socialwebspider_domain_Message" path="/messages" update="false" z="user-managed">
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Message_messageTo" property="messageTo" render="false" z="user-managed"/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Message_messageFrom" property="messageFrom" z="oPSpf0KXz2WBAEwouzJ3vrLQb0o="/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Message_subject" property="subject" z="uPn1rzHVG757UkSlHbsLtJZgznk="/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Message_contents" property="contents" render="false" z="user-managed"/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Message_owner" property="owner" render="false" z="user-managed"/>
+            <table:column date="true" dateTimePattern="MMMM d yyyy h:m a" id="c_edu_unlv_cs_socialwebspider_domain_Message_messageDate" property="messageDate" z="user-managed"/>
+        </table:table>
+    </page:list>
+</div>

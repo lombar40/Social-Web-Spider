@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_edu_unlv_cs_socialwebspider_domain_Message" modelAttribute="message" path="/messages" versionField="Version" z="sxGaKQx4yGu5qAA+E/q+9jcF2pY=">
+        <field:input field="messageTo" id="c_edu_unlv_cs_socialwebspider_domain_Message_messageTo" required="true" z="1dXRXFH0kIL7Dfa3orgdxApcw28="/>
+        <field:input field="messageFrom" id="c_edu_unlv_cs_socialwebspider_domain_Message_messageFrom" required="true" z="jyu8lw1USJlezuC780e03Ufvuz8="/>
+        <field:input field="contents" id="c_edu_unlv_cs_socialwebspider_domain_Message_contents" required="true" z="bsvkeh3LiNirv3IJhJRiYzG1DiY="/>
+        <field:select field="owner" id="c_edu_unlv_cs_socialwebspider_domain_Message_owner" itemValue="id" items="${users}" path="/users" z="c6n6+we9t7JDJ+JwyKSRSEd6ZL8="/>
+        <field:datetime dateTimePattern="${message_messagedate_date_format}" field="messageDate" id="c_edu_unlv_cs_socialwebspider_domain_Message_messageDate" z="HhRKZURxqZjTt0VBSITkJIKd/yQ="/>
+        <field:input field="subject" id="c_edu_unlv_cs_socialwebspider_domain_Message_subject" required="true" z="0SPLd53p5VbwhljNshlyMuEtl10="/>
+    </form:update>
+</div>

@@ -3,6 +3,7 @@
 
 package edu.unlv.cs.socialwebspider.web;
 
+import edu.unlv.cs.socialwebspider.domain.Message;
 import edu.unlv.cs.socialwebspider.domain.Profile;
 import edu.unlv.cs.socialwebspider.domain.User;
 import edu.unlv.cs.socialwebspider.web.ApplicationConversionServiceFactoryBean;
@@ -13,6 +14,30 @@ import org.springframework.format.FormatterRegistry;
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
     declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
+    
+    public Converter<Message, String> ApplicationConversionServiceFactoryBean.getMessageToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<edu.unlv.cs.socialwebspider.domain.Message, java.lang.String>() {
+            public String convert(Message message) {
+                return new StringBuilder().append(message.getMessageTo()).append(" ").append(message.getMessageFrom()).append(" ").append(message.getContents()).append(" ").append(message.getMessageDate()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Message> ApplicationConversionServiceFactoryBean.getIdToMessageConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, edu.unlv.cs.socialwebspider.domain.Message>() {
+            public edu.unlv.cs.socialwebspider.domain.Message convert(java.lang.Long id) {
+                return Message.findMessage(id);
+            }
+        };
+    }
+    
+    public Converter<String, Message> ApplicationConversionServiceFactoryBean.getStringToMessageConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, edu.unlv.cs.socialwebspider.domain.Message>() {
+            public edu.unlv.cs.socialwebspider.domain.Message convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Message.class);
+            }
+        };
+    }
     
     public Converter<Profile, String> ApplicationConversionServiceFactoryBean.getProfileToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<edu.unlv.cs.socialwebspider.domain.Profile, java.lang.String>() {
@@ -63,6 +88,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     }
     
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
+        registry.addConverter(getMessageToStringConverter());
+        registry.addConverter(getIdToMessageConverter());
+        registry.addConverter(getStringToMessageConverter());
         registry.addConverter(getProfileToStringConverter());
         registry.addConverter(getIdToProfileConverter());
         registry.addConverter(getStringToProfileConverter());

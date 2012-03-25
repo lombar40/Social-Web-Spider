@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_edu_unlv_cs_socialwebspider_domain_User" items="${users}" z="6M2W+d4sOjb9T9DcaskVJf1/Ea0=">
-        <table:table data="${users}" id="l_edu_unlv_cs_socialwebspider_domain_User" path="/users" z="eM13xLRddR1olBR4YKo+1bwNCpo=">
+        <table:table create="false" data="${users}" id="l_edu_unlv_cs_socialwebspider_domain_User" path="/users" z="user-managed">
             <table:column id="c_edu_unlv_cs_socialwebspider_domain_User_username" property="username" z="FqWygERAruoC907HPs0FAFWjTZ4="/>
             <table:column id="c_edu_unlv_cs_socialwebspider_domain_User_emailAddress" property="emailAddress" z="MzxvBTRvCodML41Z67i5J19sJpo="/>
             <table:column id="c_edu_unlv_cs_socialwebspider_domain_User_password" property="password" render="false" z="user-managed"/>

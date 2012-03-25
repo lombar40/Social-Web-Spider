@@ -83,7 +83,9 @@ public class DatabaseAuthenticationProvider extends
 	    		throw new BadCredentialsException("Invalid password");
 	    	}
 	      
-	    	authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));	// Set root admin privileges
+	    	// Set root admin privileges
+	    	authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));	
+	    	authorities.add(new GrantedAuthorityImpl("ROLE_ROOT"));
 	    } 
 	    // Else attempt non root admin user
 	    else {

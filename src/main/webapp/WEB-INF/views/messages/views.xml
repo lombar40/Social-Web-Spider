@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="messages/list">
+        <put-attribute name="body" value="/WEB-INF/views/messages/list.jspx"/>
+    </definition>
+<definition extends="default" name="messages/show">
+        <put-attribute name="body" value="/WEB-INF/views/messages/show.jspx"/>
+    </definition>
+<definition extends="default" name="messages/create">
+        <put-attribute name="body" value="/WEB-INF/views/messages/create.jspx"/>
+    </definition>
+<definition extends="default" name="messages/update">
+        <put-attribute name="body" value="/WEB-INF/views/messages/update.jspx"/>
+    </definition>
+<definition extends="default" name="messages/thanks">
+        <put-attribute name="body" value="/WEB-INF/views/messages/thanks.jspx"/>
+    </definition>
+</tiles-definitions>

@@ -5,10 +5,16 @@
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
         <sec:authorize access="isAuthenticated()">
             <menu:category id="c_profile" z="7+DSGeUy45gwkQx/NptxyQe7XpY=">
-                <sec:authorize access="hasRole('ROLE_ADMIN')">
-                    <menu:item id="i_profile_new" messageCode="global_menu_new" url="/profiles?form" z="5CN+Gy9le00bCK9RJj72N/fBXsM="/>
-                </sec:authorize>
+                <menu:item id="i_profile_new" messageCode="global_menu_new" render="false" url="/profiles?form" z="user-managed"/>
                 <menu:item id="i_profile_list" messageCode="global_menu_list" url="/profiles?page=1&amp;size=${empty param.size ? 10 : param.size}" z="Xn953x2DUSQIcljOjuowLDd1gRc="/>
+            </menu:category>
+        </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+            <menu:category id="c_message" z="2mg8OfqheWP/rnVu0slpEU516Yk=">
+                <menu:item id="i_message_new" messageCode="global_menu_new" url="/messages?form" z="6ME+t1wCXxIe0ueapV28lZ5YUi0="/>
+                <sec:authorize access="!hasRole('ROLE_ROOT')">
+                    <menu:item id="i_message_list" messageCode="global_menu_inbox" url="/messages?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+                </sec:authorize>
             </menu:category>
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_ADMIN')">

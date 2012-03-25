@@ -80,7 +80,7 @@ public class SignUpController {
 		}
 
 		Random random = new Random(System.currentTimeMillis());	// Generates a random number for use with activation key
-		String activationKey = "" + (random.nextInt() * -1);	// Sets the activation key
+		String activationKey = "" + Math.abs(random.nextInt());	// Sets the activation key
 		
 		Profile profile = new Profile();	// Stores profile information
 		User user = new User();				// Stores user information

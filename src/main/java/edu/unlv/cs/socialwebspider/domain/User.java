@@ -1,20 +1,19 @@
 package edu.unlv.cs.socialwebspider.domain;
 
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
-import org.springframework.roo.addon.tostring.RooToString;
-import javax.validation.constraints.NotNull;
-import javax.persistence.Column;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import edu.unlv.cs.socialwebspider.domain.Profile;
+import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
+import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
 @RooToString
@@ -24,40 +23,34 @@ public class User {
     @NotNull
     @Column(unique = true)
     @Size(min = 1)
-    private String username;	// Stores the user's username
+    private String username;
 
     @NotNull
     @Size(min = 1)
-    private String password;	// Stores the users's encrypted password
+    private String password;
 
     @NotNull
     @Column(unique = true)
     @Size(min = 1)
-    private String emailAddress;	// Stores the user's email address
+    private String emailAddress;
 
-    private Boolean enabled;		// Stores the enabled flag for the user
+    private Boolean enabled;
 
-    private String activationKey;	// Stores the activation key for the user
+    private String activationKey;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "M-")
-    private Date activationDate;	// Stores the activation date of the user
+    private Date activationDate;
 
     @OneToOne
-    private Profile profile;		// Stores the user's customizable profile
+    private Profile profile;
 
-    private Boolean admin;			// Stores the admin flag for the user
-    
-    public long getUserIdByUsername()
-    {
-    	TypedQuery<User> usernameQuery = User.findUsersByUsername(this.username);	// Sets up a query to check for existing username
-    	
-    	// If results is 0 user is either an admin or profile doesn't exist
-    	if(usernameQuery.getResultList().isEmpty())
-    		return -1L;
-    	
-    	// Return the user's ID
-    	User user = usernameQuery.getSingleResult();
-    	return user.getId();
+    private Boolean admin;
+
+    public long getUserIdByUsername() {
+        TypedQuery<User> usernameQuery = User.findUsersByUsername(this.username);
+        if (usernameQuery.getResultList().isEmpty()) return -1L;
+        User user = usernameQuery.getSingleResult();
+        return user.getId();
     }
 }
