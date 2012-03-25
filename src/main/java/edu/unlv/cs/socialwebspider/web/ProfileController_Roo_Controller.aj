@@ -61,12 +61,6 @@ privileged aspect ProfileController_Roo_Controller {
         return "redirect:/profiles/" + encodeUrlPathSegment(profile.getId().toString(), httpServletRequest);
     }
     
-    @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
-    public String ProfileController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, Profile.findProfile(id));
-        return "profiles/update";
-    }
-    
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String ProfileController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         Profile profile = Profile.findProfile(id);

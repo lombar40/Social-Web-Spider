@@ -1,42 +1,67 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" 
-    xmlns:form="http://www.springframework.org/tags/form" 
-    xmlns:jsp="http://java.sun.com/JSP/Page" 
-    xmlns:spring="http://www.springframework.org/tags" version="2.0">
-    
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" version="2.0">  
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes"/>
-  <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.SimpleTextarea');dojo.require('dijit.form.FilteringSelect');</script>
-  <div id="_title_div">
-    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: 'Change Password'}})); </script>
+  <spring:message code="changepassword_title" var="title" htmlEscape="false" />
+  <util:panel id="title" title="${title}">
+  	<p>
+		<spring:message code="changepassword_message" />
+	</p>
+	<br />
     <form:form method="POST" commandName="changePasswordForm">
-      <div id="changepassword_oldpassword">
-        <label for="_oldpassword_id">Current Password:</label>
-        <form:password cssStyle="width:250px" id="_changepassword_oldpassword" maxlength="30" path="oldPassword"/>
-        <br/>
+      <div>
+        <label style="width:125px;" for="_oldpassword_id">
+        	<spring:message code="changepassword_form_oldpassword_label" />
+        </label>
+        <input id="oldPassword" type="password" name='oldPassword' style="width:150px" />
+        <spring:message code="changepassword_form_oldpassword_message" var="oldpassword_msg" htmlEscape="false" />
+        <script type="text/javascript">
+          <c:set var="changepassword_oldpassword_msg">
+            <spring:escapeBody javaScriptEscape="true">${oldpassword_msg}</spring:escapeBody>
+          </c:set>
+          Spring.addDecoration(new Spring.ElementDecoration({elementId : "oldPassword", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${changepassword_oldpassword_msg}", required : true}})); 
+        </script>
         <form:errors cssClass="errors" path="oldPassword"/>
       </div>
       <br/>
-      <div id="changepassword_newpassword">
-        <label for="_newpassword_id">New Password:</label>
-        <form:password cssStyle="width:250px" id="_changepassword_newpassword" maxlength="30" path="newPassword"/>
-        <br/>
+      <div>
+        <label style="width:125px;" for="_newpassword_id">
+        	<spring:message code="changepassword_form_newpassword_label" />
+        </label>
+        <input id="newPassword" type="password" name='newPassword' style="width:150px" />
+        <spring:message code="changepassword_form_newpassword_message" var="newpassword_msg" htmlEscape="false" />
+        <script type="text/javascript">
+          <c:set var="changepassword_newpassword_msg">
+            <spring:escapeBody javaScriptEscape="true">${newpassword_msg}</spring:escapeBody>
+          </c:set>
+          Spring.addDecoration(new Spring.ElementDecoration({elementId : "newPassword", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${changepassword_newpassword_msg}", required : true}})); 
+        </script>
         <form:errors cssClass="errors" path="newPassword"/>
       </div>
       <br/>
-      <div id="changepassword_newpasswordrepeat">
-        <label for="_newpasswordrepeat_id">New Password Repeat:</label>
-        <form:password cssStyle="width:250px" id="_changepassword_newpasswordagain" maxlength="30" path="newPasswordRepeat"/>
-        <br/>
+      <div>
+        <label style="width:125px;" for="_newpasswordrepeat_id">
+        	<spring:message code="changepassword_form_newpasswordrepeat_label" />
+        </label>
+        <input id="newPasswordRepeat" type="password" name='newPasswordRepeat' style="width:150px" />
+        <spring:message code="changepassword_form_newpasswordrepeat_message" var="newpasswordrepeat_msg" htmlEscape="false" />
+        <script type="text/javascript">
+          <c:set var="changepassword_newpasswordrepeat_msg">
+            <spring:escapeBody javaScriptEscape="true">${newpasswordrepeat_msg}</spring:escapeBody>
+          </c:set>
+          Spring.addDecoration(new Spring.ElementDecoration({elementId : "newPasswordRepeat", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${changepassword_newpasswordrepeat_msg}", required : true}})); 
+        </script>
         <form:errors cssClass="errors" path="newPasswordRepeat"/>
       </div>
       <br/><br/>
-      <div class="submit" id="changepassword_submit">
-        
+      <div class="submit">
         <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId: 'proceed', event : 'onclick'}));</script>
-        <input id="proceed" type="submit" value="Submit"/>
+        <spring:message code="button_submit" var="submit_label" htmlEscape="false" />
+        <input id="proceed" type="submit" value="${fn:escapeXml(submit_label)}" />
+        <spring:message code="button_reset" var="reset_label" htmlEscape="false" />
+        <input id="reset" type="reset" value="${fn:escapeXml(reset_label)}" />
       </div>
       <br/>
       <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
     </form:form>
-  </div>
+  </util:panel>
 </div>

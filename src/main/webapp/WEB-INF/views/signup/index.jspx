@@ -6,6 +6,7 @@
 	<p>
 		<spring:message code="signup_message" />
 	</p>
+	<br />
     <form:form method="POST" commandName="signUpForm">
       <div>
         <label for="signup_form_username_label">

@@ -93,6 +93,12 @@ public class DatabaseAuthenticationProvider extends
 		        User targetUser = (User) query.getSingleResult();	// Query database for provided username
 		        expectedPassword = targetUser.getPassword();	// Get expected password from found user
 		        
+		        // Check and make sure the user's account has been activated
+		        if (!targetUser.getEnabled())
+		        {
+		        	throw new BadCredentialsException("Account not activated");
+		        }
+		        
 		        // If no password is set, throw error
 		        if (! StringUtils.hasText(expectedPassword)) {
 		        	throw new BadCredentialsException("No password for " + username + " set in database, contact administrator");

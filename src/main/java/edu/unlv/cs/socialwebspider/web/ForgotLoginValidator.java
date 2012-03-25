@@ -29,7 +29,7 @@ public class ForgotLoginValidator implements Validator {
 		results = query.getResultList();
 		if(results.isEmpty())
 		{
-			errors.rejectValue("emailAddress", "forgotlogin_emailnotfound");
+			errors.rejectValue("emailAddress", "forgot_login_emailnotfound");
 		}
 	}
 }

@@ -7,13 +7,14 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.Column;
 import javax.validation.constraints.Size;
 import java.util.Date;
+
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import edu.unlv.cs.socialwebspider.domain.Profile;
-import javax.persistence.ManyToOne;
 
 @RooJavaBean
 @RooToString
@@ -42,7 +43,7 @@ public class User {
     @DateTimeFormat(style = "M-")
     private Date activationDate;	// Stores the activation date of the user
 
-    @ManyToOne
+    @OneToOne
     private Profile profile;		// Stores the user's customizable profile
 
     private Boolean admin;			// Stores the admin flag for the user

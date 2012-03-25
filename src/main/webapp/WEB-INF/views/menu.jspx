@@ -13,7 +13,7 @@
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_ADMIN')">
             <menu:category id="c_user" z="uoTSf/uIZ821ZppidzS9aO776yk=">
-                <menu:item id="i_user_new" messageCode="global_menu_new" url="/users?form" z="Zv1m8u2rG+JFKcvJ+AHVVK0ey24="/>
+                <menu:item id="i_user_new" messageCode="global_menu_new" render="false" url="/users?form" z="user-managed"/>
                 <menu:item id="i_user_list" messageCode="global_menu_list" url="/users?page=1&amp;size=${empty param.size ? 10 : param.size}" z="4MY4uybxa60Q1G2rlI5bOwg+sm0="/>
             </menu:category>
         </sec:authorize>
