@@ -20,7 +20,7 @@
           </c:set>
           Spring.addDecoration(new Spring.ElementDecoration({elementId : "oldPassword", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${changepassword_oldpassword_msg}", required : true}})); 
         </script>
-        <form:errors cssClass="errors" path="oldPassword"/>
+        <form:errors cssStyle="margin-left: 132px;" cssClass="errors" path="oldPassword"/>
       </div>
       <br/>
       <div>
@@ -35,7 +35,7 @@
           </c:set>
           Spring.addDecoration(new Spring.ElementDecoration({elementId : "newPassword", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${changepassword_newpassword_msg}", required : true}})); 
         </script>
-        <form:errors cssClass="errors" path="newPassword"/>
+        <form:errors cssStyle="margin-left: 132px;" cssClass="errors" path="newPassword"/>
       </div>
       <br/>
       <div>
@@ -50,7 +50,7 @@
           </c:set>
           Spring.addDecoration(new Spring.ElementDecoration({elementId : "newPasswordRepeat", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${changepassword_newpasswordrepeat_msg}", required : true}})); 
         </script>
-        <form:errors cssClass="errors" path="newPasswordRepeat"/>
+        <form:errors cssStyle="margin-left: 132px;" cssClass="errors" path="newPasswordRepeat"/>
       </div>
       <br/><br/>
       <div class="submit">

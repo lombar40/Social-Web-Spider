@@ -18,12 +18,15 @@ public class SignUpValidator implements Validator {
 		return SignUpForm.class.equals(clazz);
 	}
 
+	/**
+	 * Validates the information the user provided. Checks if the username/email elready exists and checks if the passwords match
+	 */
 	@Override
 	public void validate(Object target, Errors errors) {
-		SignUpForm form = (SignUpForm) target;		// Signup form
-		String password = form.getPassword();		// Stores password from signup form
-		String repeatPassword = form.getPasswordRepeat();	// Stores repeated password from signup form
-		TypedQuery<User> usernameQuery = User.findUsersByUsername(form.getUsername());	// Sets up a query to check for existing username
+		SignUpForm form = (SignUpForm) target;													// Signup form
+		String password = form.getPassword();													// Stores password from signup form
+		String repeatPassword = form.getPasswordRepeat();										// Stores repeated password from signup form
+		TypedQuery<User> usernameQuery = User.findUsersByUsername(form.getUsername());			// Sets up a query to check for existing username
 		TypedQuery<User> emailQuery = User.findUsersByEmailAddress(form.getEmailAddress());		// Sets up a query to check for existing email
 		List<User> results;
 		

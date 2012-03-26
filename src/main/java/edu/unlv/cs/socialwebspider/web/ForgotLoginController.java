@@ -32,25 +32,45 @@ public class ForgotLoginController {
 	@Autowired
 	private MessageDigestPasswordEncoder messageDigestPasswordEncoder;	// Sets up a password encryptor
 	
-	// Sets up a forgotlogin model
+	/**
+	 * Sets up a new forgotloginform model
+	 * 
+	 * @return The URL to the jspx
+	 */
 	@ModelAttribute("forgotLoginForm")
 	public ForgotLoginForm fromBackingObject() {
 		return new ForgotLoginForm();
 	}
 	
+	/**
+	 * Returns the user a pre filled out forgotloginform
+	 * 
+	 * @param model The MVC model
+	 * @param form A pre filled out form
+	 * @return The URL to the jspx
+	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String createForm(Model model) {
-		ForgotLoginForm form = new ForgotLoginForm();
-		model.addAttribute("Forgot Password", form);
+	public String createForm(Model model, ForgotLoginForm form) {
+		model.addAttribute("form", form);
 		return "forgotlogin/index";
 	}
 	
+	/**
+	 * Attempts to send the user their login information
+	 * 
+	 * @param form The form the user has filled out
+	 * @param result The results of the form (errors)
+	 * @param model The MVC model
+	 * @param request The HTTP request
+	 * @return The URL to the jspx
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(@Valid ForgotLoginForm form, BindingResult result, Model model, HttpServletRequest request) {
 		validator.validate(form, result);	// Validates provided information
+		
 		// Returns the form with errors found
 		if(result.hasErrors()) {
-			return createForm(model);
+			return createForm(model, form);
 		}
 		
 		String emailAddress = form.getEmailAddress();	// Gets the email from the form
@@ -59,7 +79,7 @@ public class ForgotLoginController {
 		Random random = new Random(System.currentTimeMillis());	// Generates a random number
 		String newPassword = "" + (random.nextInt() * -1);	// Sets the string for the new password
 		
-		
+		// If reset is specified
 		if(form.getResetPassword())
 		{
 			targetUser.setPassword(messageDigestPasswordEncoder.encodePassword(newPassword, null));	// Encrypts and sets the user password
@@ -70,16 +90,18 @@ public class ForgotLoginController {
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(targetUser.getEmailAddress());
 		mail.setSubject("Social Web Spider Login Retrevial");
+		
+		// If the user requested a password reset send that message message
 		if(form.getResetPassword())
 		{
 			mail.setText("Hello, here is your requested login and password reset.\n\nUsername: " + targetUser.getUsername() + "\nNew Password: " + newPassword + "\n\nThanks, Social Web Spider");
+			mailSender.send(mail);
+			return "forgotlogin/thanks";
 		}
-		else
-		{
-			mail.setText("Hello, here is your requested login.\n\nUsername: " + targetUser.getUsername() + "\n\nThanks, Social Web Spider");
-		}
-		mailSender.send(mail);
 		
+		// Send the user just an e-mail
+		mail.setText("Hello, here is your requested login.\n\nUsername: " + targetUser.getUsername() + "\n\nThanks, Social Web Spider");
+		mailSender.send(mail);
 		return "forgotlogin/thanks";
 	}
 }

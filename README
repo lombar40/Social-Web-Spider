@@ -7,6 +7,7 @@ Social Web Spider
 -Users can view other profiles
 -Users can change their password
 -Users can be set to admins
+-Users can send messages to eachother
 
 MySQL database needed. Customize database info in database.properties file
 E-mail address login needed. E-mail me for the password or use your own.

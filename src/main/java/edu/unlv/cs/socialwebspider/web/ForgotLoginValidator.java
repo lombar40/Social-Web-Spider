@@ -15,10 +15,12 @@ public class ForgotLoginValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		// TODO Auto-generated method stub
-		return false;
+		return ForgotLoginForm.class.equals(clazz);
 	}
-
+	
+	/**
+	 * Validates the entered data. Checks if the email provided exists.
+	 */
 	@Override
 	public void validate(Object target, Errors errors) {
 		ForgotLoginForm form = (ForgotLoginForm) target;	// Forgotlogin form

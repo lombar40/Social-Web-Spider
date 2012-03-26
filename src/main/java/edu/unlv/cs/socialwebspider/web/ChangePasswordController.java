@@ -26,13 +26,22 @@ public class ChangePasswordController {
 	@Autowired
 	private MessageDigestPasswordEncoder messageDigestPasswordEncoder;	// Sets up a password encryptor
 	
-	// Models the change password form
+	/**
+	 * Models the change password form
+	 * 
+	 * @return Returns the URL to the jspx
+	 */
 	@ModelAttribute("changePasswordForm")
 	public ChangePasswordForm fromBackingObject() {
 		return new ChangePasswordForm();
 	}
 	
-	// Shows the change password form
+	/**
+	 * Shows the change password form
+	 * 
+	 * @param model 
+	 * @return Returns the URL to the jspx
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String createForm(Model model) {
 		ChangePasswordForm form = new ChangePasswordForm();
@@ -40,7 +49,15 @@ public class ChangePasswordController {
 		return "changepassword/index";
 	}
 	
-	// Attempts to change the user password
+	/**
+	 * Attempts to change the user password
+	 * 
+	 * @param form The form with the info the user submitted
+	 * @param result The results of the form (errors)
+	 * @param model MVC model
+	 * @param request HTTP Request
+	 * @return Returns the URL to the jspx
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(@Valid ChangePasswordForm form, BindingResult result, Model model, HttpServletRequest request) {
 		

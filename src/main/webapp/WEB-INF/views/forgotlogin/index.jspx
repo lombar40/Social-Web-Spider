@@ -12,7 +12,7 @@
         <label for="_emailaddress_id">
 			<spring:message code="forgot_login_form_email_label" />
         </label>
-		<input id="emailAddress" type='text' name='emailAddress' style="width:150px" />
+		<input value="${form.emailAddress}" id="emailAddress" type='text' name='emailAddress' style="width:150px" />
 		<spring:message code="forgot_login_form_email_message" var="email_msg" htmlEscape="false" />
 		<script type="text/javascript">
           <c:set var="forgot_login_email_msg">
@@ -27,7 +27,7 @@
 		<label for="_resetpassword_id">
 			<spring:message code="forgot_login_form_resetpassword_label" />
 		</label>
-		<form:checkbox id="_forgotlogin_resetpassword" path="resetPassword" />
+		<form:checkbox value="${form.resetPassword}" id="_forgotlogin_resetpassword" path="resetPassword" />
       </div>
       <br/><br/>
       <div class="submit">

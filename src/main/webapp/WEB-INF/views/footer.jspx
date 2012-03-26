@@ -15,27 +15,27 @@
 	<c:set var="userId" value="${userBean.getUserIdByUsername()}" />
 	<c:if test="${userId != -1}">
   	<c:out value=" | "/>
-    <span>
-      <spring:url value="/profiles/${userId}" var="viewprofile" />
-      <a href="${viewprofile}">
-        <spring:message code="footer_viewprofile"/>
-      </a>
-    </span>
-    <c:out value=" | "/>
-    <span>
-      <spring:url value="/profiles/${userId}?form" var="editprofile" />
-      <a href="${editprofile}">
-        <spring:message code="footer_editprofile"/>
-      </a>
-    </span>
+	    <span>
+	      <spring:url value="/profiles/${userId}" var="viewprofile" />
+	      <a href="${viewprofile}">
+	        <spring:message code="footer_viewprofile"/>
+	      </a>
+	    </span>
+	    <c:out value=" | "/>
+	    <span>
+	      <spring:url value="/profiles/${userId}?form" var="editprofile" />
+	      <a href="${editprofile}">
+	        <spring:message code="footer_editprofile"/>
+	      </a>
+	    </span>
+	    <c:out value=" | "/>
+	    <span>
+	      <spring:url value="/changepassword" var="changepassword"/>
+	      <a href="${changepassword}">
+	        <spring:message code="footer_changepassword"/>
+	      </a>
+	    </span>
     </c:if>
-    <c:out value=" | "/>
-    <span>
-      <spring:url value="/changepassword" var="changepassword"/>
-      <a href="${changepassword}">
-        <spring:message code="footer_changepassword"/>
-      </a>
-    </span>
     <c:out value=" | "/>
     <span>
       <spring:url value="/resources/j_spring_security_logout" var="logout"/>

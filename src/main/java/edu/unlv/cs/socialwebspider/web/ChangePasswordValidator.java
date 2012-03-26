@@ -14,6 +14,9 @@ public class ChangePasswordValidator implements Validator {
 		return ChangePasswordForm.class.equals(clazz);
 	}
 	
+	/**
+	 * Validates the entered passwords to ensure that the current password is valid, and that the new passwords entered match
+	 */
 	@Override
 	public void validate(Object target, Errors errors) {
 		org.springframework.security.core.userdetails.User authUser = DatabaseAuthenticationProvider.getPrincipal();	// Stores the authenticated user's details
