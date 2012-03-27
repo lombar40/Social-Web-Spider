@@ -1,0 +1,464 @@
+The following are notes related to the spider portion of the project. They are meant to be crib notes for
+various portions of the project. They are not meant to be formal documenation.
+
+
+
+
+
+download spring source tool kit
+install SSTK
+Setup Spring Roo
+Get project working with Spring Roo and Maven
+Add Crawler4j to the pom
+
+Setup way to run crawler4j for period of time
+	make temp dir for configuration
+	make temp dir for spidered files
+	spider
+		download to spider folder
+	stop spidering
+	upload downloaded files into db
+	remove temp directories
+Setup so run in threads
+Find way to setup priority of threads
+
+
+Upload blob to database. 
+	http://lists.mysql.com/java/5998
+		The easiest way is to use PreparedStatements, and bind the blob parameter
+		using setBinaryStream(colnumber, new FileInputStream("yourfilename"));
+
+	http://lists.mysql.com/java/6014		
+		It's actually not that difficult.. If you've gotten to the point where the
+		file has been uploaded to the server succesfully, you open the file,
+		create an inputstream, read the file (typically in.read) ..  append it onto a
+		bytearray (I actually use System.arraycopy ).. but there's probably a
+		better solution than that..
+
+		Once the bytearray is full.. something like this:
+
+
+		[code]
+		String query;
+		PreparedStatement ps = null;
+
+		query  = "insert into filedata(masterid, filedata) values (?, ?)";
+		ps = conn.prepareStatement(query);
+
+		ps.setInt(1, autoid);
+		ps.setBytes(2, bbdata);
+		ps.execute();
+		[/code]
+
+		I'd love to give away the code I have.. but it's owned by someone and
+		doesn't interface with HTTP/system files .. it streams binary data in/out
+		of mysql thru a FTP interface..  pretty cool..
+
+	http://lists.mysql.com/java/6017		
+		After posting the question that started this thread, I managed to get my
+		code to work, thanks in part to the answers I received.
+
+		Here is the relevant code from my prototype programs, which I used to learn
+		the techniques of storing and fetching blobs.
+
+		[This is the script that I used to create my table. It contains two
+		mediumblob columns, picture and audio.]
+		#drop table Blobs;
+		create table Blobs
+		(member_name char(20) not null,
+		 picture_filename char(50),
+		 picture mediumblob,
+		 picture_caption blob,
+		 audio_filename char(50),
+		 audio mediumblob,
+		 audio_caption blob,
+		 primary key(member_name));
+
+		[This is the method I used to insert a new row into the Blobs table. Note
+		the following:
+		- The blobs that I am trying to store in the database exist as files on my
+		file system. They are in the
+		blobsIn subdirectory, which is immediately below the directory containing my
+		code.
+		- I am using the current MySQL/J driver which supports JDBC 3.0. Therefore,
+		I am not using setBytes() or even setBlob() to insert blob values into a
+		blob column; I am using setBinaryStream(). However, I used to use setBytes()
+		and still have the code for that if you need it: it needs a fairly lengthy
+		additional method to convert the files to byte arrays.]
+
+		public void insertRow() {
+
+		   String METHOD_NAME = "insertRow()";
+
+		   String insertStmt = "insert into Blobs (member_name, picture_filename,
+		picture, picture_caption, audio_filename, audio, audio_caption) values(?, ?,
+		?, ?, ?, ?, ?)";
+
+		/* The table name is the 3rd string in the Create Table command. */
+		   StringTokenizer st = new StringTokenizer(insertStmt, " ");
+		   for (short ix=0; ix<2; ix++) st.nextToken(); //discard first two words
+		   String tableName = st.nextToken();
+		   if (DEBUG) System.out.println("tableName is " + tableName);
+
+		/* Determine current path. */
+				URL urlBlobInPath = this.getClass().getResource("/blobIn");
+				if (DEBUG) System.out.println("urlBlobInPath: " +
+		urlBlobInPath.toString());
+		   String EncodedBlobInPath = urlBlobInPath.getFile(); //String version of
+		file name
+				if (DEBUG) System.out.println(CLASS_NAME + "." + METHOD_NAME + " -
+		EncodedBlobInPath: " + EncodedBlobInPath);
+				String DecodedBlobInPath = null;
+				try {
+						DecodedBlobInPath = URLDecoder.decode(EncodedBlobInPath,
+		"UTF-8");
+						if (DEBUG) System.out.println(CLASS_NAME + "." + METHOD_NAME
+		+ " - DecodedBlobInPath: " + DecodedBlobInPath);
+						}
+				catch (UnsupportedEncodingException ue_excp) {
+						System.out.println(CLASS_NAME + " - Failed to decode file
+		name " + EncodedBlobInPath + ". Error: " + ue_excp);
+						System.exit(16);
+						}
+
+		/* Set the host variables. */
+		   String MemberName = "Dave G.";
+		   String PictureFilename = "BBQ2000b.jpg";
+		   File PictureFile = new File(DecodedBlobInPath, PictureFilename);
+		   FileInputStream PFStream = null;
+		   try {
+				 PFStream = new FileInputStream(PictureFile);
+				 }
+		  catch (FileNotFoundException fnf_excp) {
+				 String msg = CLASS_NAME + "." + METHOD_NAME + " - Error encountered
+		while trying to create FileInputStream for PictureFile, " + PictureFilename
+		+ ". Error: " + fnf_excp;
+				 System.err.println(msg);
+				 fnf_excp.printStackTrace();
+				 System.exit(16);
+				  }
+		   String PictureCaption = "From left to right: Dave and Mary at the XYZ
+		Barbecue of 2000.";
+		   String AudioFilename = "KWAISONG.MID";
+		   File AudioFile = new File(DecodedBlobInPath, AudioFilename);
+		   FileInputStream AFStream = null;
+		   try {
+				 AFStream = new FileInputStream(AudioFile);
+				 }
+		   catch (FileNotFoundException fnf_excp) {
+				 String msg = CLASS_NAME + "." + METHOD_NAME + " - Error encountered
+		while trying to create FileInputStream for AudioFile, " + AudioFilename + ".
+		Error: " + fnf_excp;
+				 System.err.println(msg);
+				 fnf_excp.printStackTrace();
+				 System.exit(16);
+				 }
+		   String AudioCaption = "This is a caption for a sound/music file.";
+
+		/* Insert a single row. */
+		   PreparedStatement pstmt01 = null;
+		   int numRows = 0;
+		   try {
+			  pstmt01 = myConn.prepareStatement(insertStmt);
+			  int ix = 1;
+			  pstmt01.setString(ix++, MemberName);
+			  pstmt01.setString(ix++, PictureFilename);
+			  pstmt01.setBinaryStream(ix++, PFStream, (int) PictureFile.length());
+			  pstmt01.setString(ix++, PictureCaption);
+			  pstmt01.setString(ix++, AudioFilename);
+			  pstmt01.setBinaryStream(ix++, AFStream, (int) AudioFile.length());
+			  pstmt01.setString(ix++, AudioCaption);
+			  numRows = pstmt01.executeUpdate();
+			  }
+		   catch (SQLException sql_excp) {
+			  if (sql_excp.getSQLState().equals("23505")) {
+				 String msg = "Row cannot be added to table " + tableName + "
+		because another row with this key already exists.";
+				 System.err.println(msg);
+				 return;
+				 }
+			  else {
+				 String msg = "Tried to store a picture and a sound file for a new
+		member. Error: " + sql_excp;
+				 System.err.println(msg);
+				 sql_excp.printStackTrace();
+				 return;
+				 }
+			  }
+
+		/* If one row was successfully inserted, assume that the Insert worked
+		correctly. Otherwise, assume there was an error. */
+		   if (numRows != 1) {
+			  String msg = "The insert of a picture and a sound file for a new
+		member inserted " + numRows + " rows, not one.";
+			  System.err.println(msg);
+			  System.exit(16);
+			  }
+
+		/* Dispose of the statement and commit. */
+		   try {
+			  pstmt01.close();
+			  myConn.commit();
+			  myConn.close();
+			  }
+		   catch (SQLException sql_excp) {
+			  String msg = "Tried to close the statement which inserted a picture
+		and a sound file for a new member, commit the transaction, and close the
+		connection. Error: " + sql_excp;
+			  System.err.println(msg);
+			  sql_excp.printStackTrace();
+			  return;
+			  }
+		}
+
+		[This is the method I use to get a specific row from the Blobs table.
+		- The blobs that I am getting from the database need to be stored as files
+		on my file system. They are written to the blobsIn subdirectory, which is
+		immediately below the directory containing my code.]
+
+		public void getRow() {
+
+		   String METHOD_NAME = "getRow()";
+
+		   String tableName = "Blobs";
+		   if (DEBUG) System.out.println(CLASS_NAME + "." + METHOD_NAME + " -
+		tableName is " + tableName);
+		   String getStmt = "select member_name, picture_filename, picture,
+		picture_caption, audio_filename, audio, audio_caption from " + tableName + "
+		where member_name = ?";
+
+		/* Determine path to which blobs should be written. */
+		   URL urlBlobOutPath = this.getClass().getResource("/blobOut");
+		   if (DEBUG) System.out.println("urlBlobOutPath: " +
+		urlBlobOutPath.toString());
+		   String EncodedBlobOutPath = urlBlobOutPath.getFile(); //String version of
+		file name
+		   if (DEBUG) System.out.println(CLASS_NAME + "." + METHOD_NAME + " -
+		EncodedBlobOutPath: " + EncodedBlobOutPath);
+		   String DecodedBlobOutPath = null;
+		   try {
+			  DecodedBlobOutPath = URLDecoder.decode(EncodedBlobOutPath, "UTF-8");
+			  if (DEBUG) System.out.println(CLASS_NAME + "." + METHOD_NAME + " -
+		DecodedBlobOutPath: " + DecodedBlobOutPath);
+			  }
+		   catch (UnsupportedEncodingException ue_excp) {
+			  System.out.println(CLASS_NAME + " - Failed to decode file name " +
+		EncodedBlobOutPath + ". Error: " + ue_excp);
+			  System.exit(16);
+			  }
+
+		/* Set the WHERE variables. */
+		   String DesiredMemberName = "Dave G.";
+
+		/* Execute the query. */
+		   PreparedStatement pstmt01 = null;
+		   ResultSet rs = null;
+		   try {
+			  pstmt01 = conn01.prepareStatement(getStmt);
+			  pstmt01.setString(1, DesiredMemberName);
+			  rs = pstmt01.executeQuery();
+			  }
+			catch (SQLException sql_excp) {
+			  if (sql_excp.getSQLState().equals("42S02")) {
+				 String msg = CLASS_NAME + "." + METHOD_NAME + " - Desired row of
+		table " + tableName + " not found. Error: " + sql_excp;
+				 System.err.println(msg);
+				 sql_excp.printStackTrace();
+				 return;
+				 }
+			  else {
+				 String msg = CLASS_NAME + "." + METHOD_NAME + " - Failed to
+		retrieve desired row. Error: " + sql_excp;
+				 System.err.println(msg);
+				 sql_excp.printStackTrace();
+				 return;
+				 }
+			  }
+
+		/* Prepare to count the number of rows in the result set. */
+		   int rowCount = 0;
+
+		/* Examine the result set, which should be a single row. The values from the
+		row are
+		   stored in Class variables. */
+		   try {
+			  while (rs.next()) {
+				 rowCount++;
+				 MemberName = rs.getString("MEMBER_NAME").trim();
+				 PictureFilename = rs.getString("PICTURE_FILENAME").trim();
+				 Blob PictureBlob = rs.getBlob("PICTURE");
+				 writeBlobToFile(PictureBlob, DecodedBlobOutPath, PictureFilename);
+				 PictureCaption = rs.getString("PICTURE_CAPTION").trim();
+				 AudioFilename = rs.getString("AUDIO_FILENAME").trim();
+				 Blob AudioBlob = rs.getBlob("AUDIO");
+				 writeBlobToFile(AudioBlob, DecodedBlobOutPath, AudioFilename);
+				 AudioCaption = rs.getString("AUDIO_CAPTION").trim();
+				 }
+			  }
+		   catch (SQLException sql_excp) {
+			  String msg = CLASS_NAME + "." + METHOD_NAME + " - Encountered
+		SQLException while reading query result set. Error: " + sql_excp;
+			  System.err.println(msg);
+			  sql_excp.printStackTrace();
+			  return;
+			  }
+
+		   if (rowCount != 1) {
+			  String msg = CLASS_NAME + "." + METHOD_NAME + " - Query failed to
+		return exactly one result row.";
+			  System.err.println(msg);
+			  return;
+			  }
+
+		/* Dispose of the statement and commit. */
+		   try {
+			  pstmt01.close();
+			  conn01.commit();
+			  conn01.close();
+			  }
+		   catch (SQLException sql_excp) {
+			  String msg = CLASS_NAME + "." + METHOD_NAME + " - Tried to close the
+		statement which got a picture of a new member, commit the transaction, and
+		close the connection. Error: " + sql_excp;
+			  System.err.println(msg);
+			  sql_excp.printStackTrace();
+			  return;
+			  }
+
+		}
+
+
+		[This is a utility method to handle the writing of any blob to a file.]
+
+		public void writeBlobToFile(Blob myBlob, String FilePath, String FileName) {
+
+		   String METHOD_NAME = "writeBlobToFile()";
+
+		   File binaryFile = new File(FilePath, FileName);
+
+		   try {
+			  FileOutputStream outstream = new FileOutputStream(binaryFile);
+			  InputStream instream = myBlob.getBinaryStream();
+
+			  int chunk = 4096;
+			  byte[] buffer = new byte[chunk];
+			  int length = -1;
+
+			  while ((length = instream.read(buffer)) != -1) {
+				 outstream.write(buffer, 0, length);
+				 }
+
+			  outstream.flush();
+			  instream.close();
+			  outstream.close();
+			  }
+		   catch (IOException io_excp) {
+			  String msg = CLASS_NAME + "." + METHOD_NAME + " - Error: " + io_excp;
+			  System.err.println(msg);
+			  io_excp.printStackTrace();
+			  return;
+			  }
+		   catch (SQLException sql_excp) {
+			  String msg = CLASS_NAME + "." + METHOD_NAME + " - Error: " + sql_excp;
+			  System.err.println(msg);
+			  sql_excp.printStackTrace();
+			  }
+		}
+
+		And lastly one very important fact: when you have stored the blob
+		successfully in the table, don't expect to see much in the table when you do
+		a select on it! In DB2, which I have been using for years, a blob shows up
+		as a string of hex bytes, e.g. X'A1B3D490'..... etc. In MySQL, you get only
+		4 bytes that often look like nonsense. That's because MySQL actually stores
+		the blob(s) outside of the table and just leaves a locator in the table to
+		point to the actual blob. I wish I had known *that* from the beginning! As
+		it turned out, my very first execution of my program which stores Blobs
+		worked perfectly but when I didn't see the data looking the way it did in
+		DB2, I thought I had messed something up and spend a number of hours
+		researchng and rewriting code to make it store the blob correctly. I could
+		have saved that time if I had known that only the locator appears in the
+		table when you do a select on it, e.g. select audio on Blobs;
+
+		I hope this helps you - and anyone else researching this point via the
+		mailing list in the future. Unfortunately, the MySQL manual has very little
+		to say about blobs so far....
+
+		Rhino		
+
+
+
+
+
+
+
+
+
+ 
+
+Crawler4j
+	http://code.google.com/p/crawler4j/
+		Must download both crawler4j-3.3.zip and crawler4j-3.x-dependencies.zip
+		
+To run image crawler example
+	edu.uci.ics.crawler4j.examples.imagecrawler.ImageCrawlController
+		arguments: root 1 images 
+		
+		
+http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html		
+http://forum.springsource.org/showthread.php?110717-can-t-determine-annotations-of-missing-type-javax-persistence-Entity-when-weaving
+
+Eclipse Check Style:
+	http://eclipse-cs.sourceforge.net/
+	http://eclipse-cs.sourceforge.net/downloads.html
+	
+	Check Style Notes to team:
+		Hey All,
+		
+		In order to ensure good programming standards for stuff we program. I would recommend installing the eclipse "check style" plugin for eclipse. I know Matt uses this and it should get your code more to his coding standards. You can look at how to install the plugin at: http://eclipse-cs.sourceforge.net/downloads.html
+		
+		Once installed, it'll require a reboot. After that you'll be able right click on your java files and towards the bottom you should see, CheckStyle --> Check Code with Check Style. Once you select this, you'll get more feedback/suggestions from Eclipse on how to improve your code. You can even select multiple files in the package explorer and do this for quick feedback. Once done, you can look at the java file and see the various suggestions. 
+		
+		I'm a bit lazy, so I like using the following shortcut keys to help do a lot of repetitive things to ensure good quality of code:
+		1) Check the various files with check style, then go into the files and do the following.
+		2) Ctrl+Alt+C - This auto fixes some of the items that check style finds.
+		3) Ctrl+Shift+F (With nothing selected). This will format the whole java file with proper indentations.
+		4) Ctrl+S - Saves the changes, so can recheck with check style and see what is left to fix.
+		5) Recheck the files using check style.
+		
+		Have fun,
+		James
+		
+C:\Users\Admin\Documents\workspace-sts-2.8.1.RELEASE
+cd SocialWebSpider
+ git init
+  touch README
+  git add README
+  git commit -m 'first commit'
+  git remote add origin git@github.com:JamesOravec/SocialWebSpider.git
+  git push -u origin master
+	
+http://stackoverflow.com/questions/3697287/eclipse-set-maximum-line-length-for-auto-formatting
+	
+Design Notes related to crawler4j base code:
+	So, crawler4j was coded in a way that I was not able to make the code as general as I would like.
+	
+	Particularly in terms of how crawler4j has static references to "patterns". These patterns are determine what gets skipped and what gets downloaded. Since we wish to have multiple users with the possibilities of different filters on what they want to download. I was making this general, until I found I kill crawler4j without the static references... :(
+	
+	The next best solution I came up was making the crawler a base class, then extend it in such a way that I would have to change minimal info, e.g. just the patterns. By doing this, we'll need to have a class for each "type" of pattern we'll allow users to search for. Its a bit limiting, but works for what we are given. My other approach would of been nicer... but eh... working with others code, what can you expect right?
+	
+	I checked in an example of the crawler with image filters, and another class that extends it and uses the same filters. I created unit tests that test these cases to see if they behave as expected and they do.
+	
+	Another thing I did was make it so the spiders get their own Universally Unique Identifiers (UUID). The UUIDs are used to create folders which ensure we don't mix files (UUID is much better than a hash, as a hash can have collisions). Anyway, the example I found was simple and I already implement it in my code, which I have checked into GitHub.
+	
+	I have to leave shortly to go have dinner with the wife's parents. After that I'll be back and will continue programming.
+	
+	Have fun,
+	James
+	
+Add of MySQL driver to pom
+	http://mvnrepository.com/artifact/mysql/mysql-connector-java/5.1.18
+	Searched for jar depency tag at: http://mvnrepository.com/
+	
+	
+	
+	
