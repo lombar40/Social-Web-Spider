@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:multi id="fc_edu_unlv_cs_socialwebspider_domain_Document" modelAttribute="document" path="/documents/savedoc" render="${empty dependencies}" z="user-managed">
+        <field:input field="documentId" id="c_edu_unlv_cs_socialwebspider_domain_Document_documentId" render="false" z="Hn1GdljIw+X857BSSkq57IugNkg="/>
+        <field:textarea field="owner" id="c_edu_unlv_cs_socialwebspider_domain_Document_owner" z="E+K6Db+39Eyv2KUqGRvcYS4JoDg="/>
+        <field:textarea field="category" id="c_edu_unlv_cs_socialwebspider_domain_Document_category" z="7V3b89RZu9C4hzd6WdWIP53pFwk="/>
+        <field:input field="name" id="c_edu_unlv_cs_socialwebspider_domain_Document_name" max="30" required="true" z="aa4oKxOR0VkkfexpbwckG/fqCx4="/>
+        <field:textarea field="description" id="c_edu_unlv_cs_socialwebspider_domain_Document_description" required="true" z="Vg06IUQGQ7Q/hpJAEGWs7oFE/HU="/>
+        <field:input field="filename" id="c_edu_unlv_cs_socialwebspider_domain_Document_filename" render="false" z="user-managed"/>
+        <field:file field="content" id="c_edu_unlv_cs_socialwebspider_domain_Document_content" required="true" z="user-managed"/>
+        <field:input field="contentType" id="c_edu_unlv_cs_socialwebspider_domain_Document_contentType" render="false" z="user-managed"/>
+        <field:input field="size" id="c_edu_unlv_cs_socialwebspider_domain_Document_size" validationMessageCode="field_invalid_integer" render="false" z="user-managed"/>
+        <field:textarea field="url" id="c_edu_unlv_cs_socialwebspider_domain_Document_url" render="false" z="user-managed"/>
+    </form:multi>
+    <form:dependency dependencies="${dependencies}" id="d_edu_unlv_cs_socialwebspider_domain_Document" render="${not empty dependencies}" z="pLWQLgkgDv1h9nLmWscBGzcch24="/>
+</div>
