@@ -11,14 +11,6 @@ privileged aspect Document_Roo_JavaBean {
         return this.MAX_SIZE;
     }
     
-    public int Document.getDocumentId() {
-        return this.documentId;
-    }
-    
-    public void Document.setDocumentId(int documentId) {
-        this.documentId = documentId;
-    }
-    
     public String Document.getOwner() {
         return this.owner;
     }

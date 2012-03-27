@@ -34,7 +34,7 @@ public interface CrawlerController {
 	 * @throws Exception
 	 *             Possible exception that can be thrown.
 	 */
-	void startSpider(int userId, int userSpecificCategoryId, String configFolder, int numberOfCrawlers, String storageFolder, 
+	void startSpider(String username, int userSpecificCategoryId, String configFolder, int numberOfCrawlers, String storageFolder, 
 			int maxDepth, int politenessDelay, String entryPoint, int minBinarySize) throws Exception;
 
 	/**
@@ -44,7 +44,7 @@ public interface CrawlerController {
 	 * @param blobBinaryFolderPath		Path of where the spidering results are.
 	 * @param userSpecificCategoryId	Category to assign for these spiderings.
 	 */
-	void storeSpiderResults(int userId, String storageFolder, int userSpecificCategoryId);
+	void storeSpiderResults(String username, String storageFolder, int userSpecificCategoryId);
 
 	/**
 	 * Used for database connection clean up and thing else that needs to happen.

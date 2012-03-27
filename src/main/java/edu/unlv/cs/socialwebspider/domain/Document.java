@@ -5,8 +5,6 @@ import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import javax.persistence.Basic;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
@@ -23,16 +21,13 @@ public class Document {
 	final int MAX_SIZE = 4000000; // 4MB limit
 	
 	// The id of the document in the database
-	private int documentId;
+	//private int documentId;
 
-	// Log errors in the controller
-	private static final Log log = LogFactory.getLog(Document.class);
-
-	@Size(max = 200)
+	@Size(min = 1)
 	private String owner;
 	
 	@Size(max = 200)
-	private String category; 
+	private String category;
 	
     @NotNull
     @Size(max = 30)
@@ -55,7 +50,7 @@ public class Document {
     
     @Transient
     @Size(max = 100)
-    private String url ;
+    private String url;
     
     
     public void checkSize()  throws SizeException

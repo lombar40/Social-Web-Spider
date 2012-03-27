@@ -6,9 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.net.URLDecoder;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -78,9 +75,9 @@ public class BlobHandler {
 	 * @param userId
 	 * @param blobBinaryFolderPath
 	 */
-	public void insertBlobsFromFolder(int userId, String blobBinaryFolderPath, int userSpecificCategoryId) {
+	public void insertBlobsFromFolder(String username, String blobBinaryFolderPath, int userSpecificCategoryId) {
 
-		System.out.println("userId: " + userId);
+		System.out.println("username: " + username);
 		System.out.println("blobBinaryFolderPath: " + blobBinaryFolderPath);
 		System.out.println("userSpecificCategoryId: " + userSpecificCategoryId);
 
@@ -93,7 +90,7 @@ public class BlobHandler {
 			if (listOfFiles[i].isFile()) {
 				fileName = listOfFiles[i].getName();
 				System.out.println(fileName);
-				insertBinaryMin(userId, fileName, blobBinaryFolderPath + "/" + fileName, userSpecificCategoryId);
+				insertBinaryMin(username, fileName, blobBinaryFolderPath + "/" + fileName, userSpecificCategoryId);
 			}
 		}
 	}
@@ -110,8 +107,8 @@ public class BlobHandler {
 	 * @param blobCaption
 	 *            e.g. "Picture of James, when he was skinny."
 	 */
-	public void insertBinaryMin(int userId, String blobFileName, String blobBinaryFilePath, int userSpecificCategoryId) {
-		String insertStmt = "INSERT INTO Blobs (userId, blobFileName, blobBinary, userSpecificCategoryId) VALUES(?, ?, ?, ?)";
+	public void insertBinaryMin(String username, String blobFileName, String blobBinaryFilePath, int userSpecificCategoryId) {
+		String insertStmt = "INSERT INTO document (size, name, description, content_type, max_size, owner, filename, content, category) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		String tableName = getTableName(insertStmt);
 		File blobFile = null;
 		blobFile = new File(blobBinaryFilePath);
@@ -123,7 +120,12 @@ public class BlobHandler {
 			fileInputStream = new FileInputStream(blobFile);
 			pstmt01 = myConn.prepareStatement(insertStmt);
 			int ix = 1;
-			pstmt01.setInt(ix++, userId);
+			pstmt01.setLong(ix++, blobFile.length());
+			pstmt01.setString(ix++, "Crawled File");
+			pstmt01.setString(ix++, "Crawled File");
+			pstmt01.setString(ix++, "Unknown");
+			pstmt01.setInt(ix++, 4000000);
+			pstmt01.setString(ix++, username);
 			pstmt01.setString(ix++, blobFileName);
 			pstmt01.setBinaryStream(ix++, fileInputStream, blobFile.length());
 			pstmt01.setInt(ix++, userSpecificCategoryId);

@@ -1,7 +1,6 @@
 package edu.unlv.cs673.socialwebspider.util.files;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 

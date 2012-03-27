@@ -19,7 +19,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Document, String> ApplicationConversionServiceFactoryBean.getDocumentToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<edu.unlv.cs.socialwebspider.domain.Document, java.lang.String>() {
             public String convert(Document document) {
-                return new StringBuilder().append(document.getMAX_SIZE()).append(" ").append(document.getDocumentId()).append(" ").append(document.getOwner()).append(" ").append(document.getCategory()).toString();
+                return new StringBuilder().append(document.getMAX_SIZE()).append(" ").append(document.getOwner()).append(" ").append(document.getCategory()).append(" ").append(document.getName()).toString();
             }
         };
     }

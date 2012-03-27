@@ -203,3 +203,5 @@ focus --class ~.domain.CurrentUser
 focus --class ~.domain.CurrentUser 
 finder add findUsersById
 finder add findUsersById
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 00:39:27
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-27 03:34:55

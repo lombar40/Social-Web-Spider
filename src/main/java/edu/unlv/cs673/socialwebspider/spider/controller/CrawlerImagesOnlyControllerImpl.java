@@ -37,11 +37,11 @@ public class CrawlerImagesOnlyControllerImpl extends AbstractCrawlerController i
 	}
 
 	@Override
-	public final void startSpider(final int userId, final int userSpecificCategoryId, final String configFolder, final int numberOfCrawlers, final String storageFolder, final int maxDepth,
+	public final void startSpider(final String username, final int userSpecificCategoryId, final String configFolder, final int numberOfCrawlers, final String storageFolder, final int maxDepth,
 			final int politenessDelay, final String entryPoint, final int minBinarySize) throws Exception {
 		startNewCrawler(configFolder, numberOfCrawlers, storageFolder, maxDepth, politenessDelay, entryPoint, minBinarySize);
 		bh = new BlobHandler();
-		storeSpiderResults(userId, storageFolder, userSpecificCategoryId);
+		storeSpiderResults(username, storageFolder, userSpecificCategoryId);
 		finishSpider(configFolder, storageFolder);
 	}
 
@@ -53,7 +53,7 @@ public class CrawlerImagesOnlyControllerImpl extends AbstractCrawlerController i
 		String[] crawlDomains = new String[] { "" + entryPoint };
 		CrawlController controller = setupCrawlController(entryPoint, config);
 
-		CrawlerImagesOnlyImpl crawler = new CrawlerImagesOnlyImpl(minBinarySize);
+		//CrawlerImagesOnlyImpl crawler = new CrawlerImagesOnlyImpl(minBinarySize);
 		CrawlerImagesOnlyImpl.configure(crawlDomains, storageFolder);
 
 		controller.start(CrawlerImpl.class, numberOfCrawlers);

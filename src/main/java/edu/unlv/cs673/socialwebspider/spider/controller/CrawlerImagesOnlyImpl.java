@@ -17,7 +17,6 @@
 
 package edu.unlv.cs673.socialwebspider.spider.controller;
 
-import java.util.regex.Pattern;
 
 /**
  * The following file is based on the ImageCrawlController example provided by
@@ -30,9 +29,9 @@ public class CrawlerImagesOnlyImpl extends CrawlerImpl {
 	
 	private int minImageSize;
 	
-	// These are patterns that need to be changed for different filtering, used by crawler4j.
-	private static Pattern patternToFilterOut = Pattern.compile(Patterns.FILTER_OUT_NON_IMAGES);
-	private static Pattern patternToSave = Pattern.compile(Patterns.PATERN_IMAGES);
+	// These are patterns that need to be changed for different filtering, used by crawler4j. NOT YET IMPLEMENTED
+	//private static Pattern patternToFilterOut = Pattern.compile(Patterns.FILTER_OUT_NON_IMAGES);
+	//private static Pattern patternToSave = Pattern.compile(Patterns.PATERN_IMAGES);
 	
 	/**
 	 * Default Constructor.
