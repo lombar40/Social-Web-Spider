@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_edu_unlv_cs_socialwebspider_domain_Document" items="${documents}" z="JCyQmEVkHuqkoQFnBybi0ww0/T0=">
+        <table:table data="${documents}" id="l_edu_unlv_cs_socialwebspider_domain_Document" path="/documents" update="false" z="wk9k8bZS6leJSDEi+IWRVxqBT4w=">
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_documentId" property="documentId" z="8r6FWAqYnn9Gnyb5x04alQDYwac="/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_owner" property="owner" z="TT5UcOYnLnaYmTP7s45tcFWZsOs="/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_category" property="category" z="qJlwIje13yjrlRaKEi2CUqjQNTw="/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_name" property="name" z="aqJyvpMkbpEo2IddTftXOaOu5u8="/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_description" property="description" z="7QVHjbmmuRSaSKNnLsHs264Z6CI="/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_filename" property="filename" z="BL9Zp+9VDAlI92wT4flZQPnobR4="/>
+        </table:table>
+    </page:list>
+</div>
