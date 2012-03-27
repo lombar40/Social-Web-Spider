@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:frame="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:url="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_edu_unlv_cs_socialwebspider_domain_Document" object="${document}" path="/documents" update="false" z="user-managed">
+        <field:display field="documentId" id="s_edu_unlv_cs_socialwebspider_domain_Document_documentId" object="${document}" render="false" z="+lnihBkwPELogYnKvXRIBS0HCAo="/>
+        <field:display field="owner" id="s_edu_unlv_cs_socialwebspider_domain_Document_owner" object="${document}" z="K1rG8fU1svX5x/Bzyv9WfKp5Aio="/>
+        <field:display field="category" id="s_edu_unlv_cs_socialwebspider_domain_Document_category" object="${document}" z="4X2M2HG/ZCXkb0Q6+4zECZxVODE="/>
+        <field:display field="name" id="s_edu_unlv_cs_socialwebspider_domain_Document_name" object="${document}" z="HVpGFeY0oXCLlibnvoF3NjheHhI="/>
+        <field:display field="description" id="s_edu_unlv_cs_socialwebspider_domain_Document_description" object="${document}" z="GJT4QXC36mUVo+XlsEPG9KxvttI="/>
+        <field:display field="filename" id="s_edu_unlv_cs_socialwebspider_domain_Document_filename" object="${document}" z="7wQrACG/03objtAKNiUlPamAQAc="/>
+        <field:display field="content" id="s_edu_unlv_cs_socialwebspider_domain_Document_content" object="${document}" render="false" z="user-managed"/>
+        <field:display field="contentType" id="s_edu_unlv_cs_socialwebspider_domain_Document_contentType" object="${document}" z="Phdjvuq3GtmZc0WZ87Xt2BgrtfE="/>
+        <field:display field="size" id="s_edu_unlv_cs_socialwebspider_domain_Document_size" object="${document}" z="+TxbAuX4tPlmPQOCHP5/TupPimk="/>
+        <field:frame field="url" id="s_edu_unlv_cs_socialwebspider_domain_Document_url" object="${document}" render="true" z="user-managed"/>
+    </page:show>
+</div>

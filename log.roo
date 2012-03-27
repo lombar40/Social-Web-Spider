@@ -198,3 +198,8 @@ perform clean
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-25 22:51:06
 perform clean
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-25 22:51:14
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-26 22:01:10
+focus --class ~.domain.CurrentUser
+focus --class ~.domain.CurrentUser 
+finder add findUsersById
+finder add findUsersById

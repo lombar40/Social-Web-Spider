@@ -23,5 +23,9 @@
                 <menu:item id="i_user_list" messageCode="global_menu_list" url="/users?page=1&amp;size=${empty param.size ? 10 : param.size}" z="4MY4uybxa60Q1G2rlI5bOwg+sm0="/>
             </menu:category>
         </sec:authorize>
+        <menu:category id="c_document" z="IwaW5r7KHuYYhv8LICTHRKgUWao=">
+            <menu:item id="i_document_new" messageCode="global_menu_new" url="/documents?form" z="bv1eg7qAwaBE1ATd78QiQm2M3ZE="/>
+            <menu:item id="i_document_list" messageCode="global_menu_list" url="/documents?page=1&amp;size=${empty param.size ? 10 : param.size}" z="p196XK4gvGXOnIrUwDqNS/p7fzE="/>
+        </menu:category>
     </menu:menu>
 </div>
