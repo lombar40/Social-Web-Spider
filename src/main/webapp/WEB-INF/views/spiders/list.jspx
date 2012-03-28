@@ -4,9 +4,10 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_edu_unlv_cs_socialwebspider_domain_Spider" items="${spiders}" z="4NBsofO/xvaYfrALjZ4Skc2pgw4=">
         <table:table data="${spiders}" id="l_edu_unlv_cs_socialwebspider_domain_Spider" path="/spiders" z="1olv44CZftEEp6N6/xAtdDvJniQ=">
-            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Spider_owner" property="owner" z="VBcpd/wis528mHGFq4OcBoPSiBE="/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Spider_owner" property="owner" render="false" z="user-managed"/>
             <table:column id="c_edu_unlv_cs_socialwebspider_domain_Spider_status" property="status" z="Sl7XoV7c+uise9av3/mNptD6YwU="/>
             <table:column id="c_edu_unlv_cs_socialwebspider_domain_Spider_url" property="url" z="ao9OH7fTw0im5uLuDoDg4D28ipw="/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Spider_category" property="category" z="ikn4K2aFPPEaT4hfnWCRKystUgU="/>
         </table:table>
     </page:list>
 </div>

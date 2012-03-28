@@ -3,7 +3,6 @@
 
 package edu.unlv.cs.socialwebspider.web;
 
-import edu.unlv.cs.socialwebspider.domain.Category;
 import edu.unlv.cs.socialwebspider.domain.Document;
 import edu.unlv.cs.socialwebspider.web.DocumentController;
 import java.io.UnsupportedEncodingException;
@@ -45,11 +44,6 @@ privileged aspect DocumentController_Roo_Controller {
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/documents";
-    }
-    
-    void DocumentController.populateEditForm(Model uiModel, Document document) {
-        uiModel.addAttribute("document", document);
-        uiModel.addAttribute("categorys", Category.findAllCategorys());
     }
     
     String DocumentController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

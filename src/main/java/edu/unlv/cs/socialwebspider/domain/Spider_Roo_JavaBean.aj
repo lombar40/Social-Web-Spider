@@ -3,6 +3,7 @@
 
 package edu.unlv.cs.socialwebspider.domain;
 
+import edu.unlv.cs.socialwebspider.domain.Category;
 import edu.unlv.cs.socialwebspider.domain.Spider;
 import edu.unlv.cs.socialwebspider.domain.User;
 
@@ -30,6 +31,14 @@ privileged aspect Spider_Roo_JavaBean {
     
     public void Spider.setUrl(String url) {
         this.url = url;
+    }
+    
+    public Category Spider.getCategory() {
+        return this.category;
+    }
+    
+    public void Spider.setCategory(Category category) {
+        this.category = category;
     }
     
 }

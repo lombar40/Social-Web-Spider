@@ -1,6 +1,8 @@
 package edu.unlv.cs.socialwebspider.web;
 
+import edu.unlv.cs.socialwebspider.domain.Category;
 import edu.unlv.cs.socialwebspider.domain.Document;
+import edu.unlv.cs.socialwebspider.domain.User;
 import edu.unlv.cs.socialwebspider.provider.DatabaseAuthenticationProvider;
 
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
@@ -135,5 +137,16 @@ public class DocumentController {
         // If no specific size/pages were specified show all.
         uiModel.addAttribute("documents", documentList);						// Add the messages to the model
         return "documents/list";										// Return the list of messages
+    }
+    
+    // Disable viweing of other's categories
+    void populateEditForm(Model uiModel, Document document) {
+    	org.springframework.security.core.userdetails.User authUser = DatabaseAuthenticationProvider.getPrincipal(); 	// Stores the authenticated user
+    	TypedQuery<User> userQuery = User.findUsersByUsername(authUser.getUsername());
+    	User owner = userQuery.getSingleResult();
+    	TypedQuery<Category> categoryQuery = Category.findCategorysByOwner(owner);
+    	List<Category> categories = categoryQuery.getResultList();
+        uiModel.addAttribute("document", document);
+        uiModel.addAttribute("categorys", categories);
     }
 }

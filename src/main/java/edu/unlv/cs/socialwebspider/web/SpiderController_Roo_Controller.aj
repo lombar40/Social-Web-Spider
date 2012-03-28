@@ -4,7 +4,6 @@
 package edu.unlv.cs.socialwebspider.web;
 
 import edu.unlv.cs.socialwebspider.domain.Spider;
-import edu.unlv.cs.socialwebspider.domain.User;
 import edu.unlv.cs.socialwebspider.web.SpiderController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,17 +19,6 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect SpiderController_Roo_Controller {
     
-    @RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String SpiderController.create(@Valid Spider spider, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, spider);
-            return "spiders/create";
-        }
-        uiModel.asMap().clear();
-        spider.persist();
-        return "redirect:/spiders/" + encodeUrlPathSegment(spider.getId().toString(), httpServletRequest);
-    }
-    
     @RequestMapping(params = "form", produces = "text/html")
     public String SpiderController.createForm(Model uiModel) {
         populateEditForm(uiModel, new Spider());
@@ -44,20 +32,6 @@ privileged aspect SpiderController_Roo_Controller {
         return "spiders/show";
     }
     
-    @RequestMapping(produces = "text/html")
-    public String SpiderController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("spiders", Spider.findSpiderEntries(firstResult, sizeNo));
-            float nrOfPages = (float) Spider.countSpiders() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("spiders", Spider.findAllSpiders());
-        }
-        return "spiders/list";
-    }
-    
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String SpiderController.update(@Valid Spider spider, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -69,12 +43,6 @@ privileged aspect SpiderController_Roo_Controller {
         return "redirect:/spiders/" + encodeUrlPathSegment(spider.getId().toString(), httpServletRequest);
     }
     
-    @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
-    public String SpiderController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, Spider.findSpider(id));
-        return "spiders/update";
-    }
-    
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String SpiderController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         Spider spider = Spider.findSpider(id);
@@ -83,11 +51,6 @@ privileged aspect SpiderController_Roo_Controller {
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/spiders";
-    }
-    
-    void SpiderController.populateEditForm(Model uiModel, Spider spider) {
-        uiModel.addAttribute("spider", spider);
-        uiModel.addAttribute("users", User.findAllUsers());
     }
     
     String SpiderController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

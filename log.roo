@@ -235,3 +235,13 @@ web mvc scaffold --class ~.web.SpiderController
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 19:47:27
 perform clean
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-27 19:48:07
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 19:50:43
+focus --class ~.domain.Spider
+finder list
+finder add findSpidersByOwner
+exit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-27 20:31:33
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 20:31:37
+perform clean
+perform clean
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-27 20:32:20
