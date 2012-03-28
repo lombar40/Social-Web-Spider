@@ -251,3 +251,7 @@ exit
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 23:42:10
 perform clean
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-27 23:42:43
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-28 01:51:07
+perform clean
+perform clean
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-28 01:54:30

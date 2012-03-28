@@ -6,7 +6,7 @@
         <field:display field="messageTo" id="s_edu_unlv_cs_socialwebspider_domain_Message_messageTo" object="${message}" render="false" z="user-managed"/>
         <field:display field="messageFrom" id="s_edu_unlv_cs_socialwebspider_domain_Message_messageFrom" object="${message}" z="148PfWibtt0xJ/y5uGnqnNja0Ig="/>
         
-        <c:if test="${message.owner.getAdmin()}">
+        <c:if test="${message.owner.getAdmin() || message.getMessageFrom() == 'Root Admin'}">
         	<div style="margin-top: -16px; width: 543px; height: 15px;">
        		<div style="margin-left: 105px;width: 438px; height: 15px;">
         	<font color="#ff0000">Admin</font>
