@@ -75,7 +75,7 @@ public class BlobHandler {
 	 * @param userId
 	 * @param blobBinaryFolderPath
 	 */
-	public void insertBlobsFromFolder(String username, String blobBinaryFolderPath, int userSpecificCategoryId) {
+	public void insertBlobsFromFolder(String username, String blobBinaryFolderPath, int userSpecificCategoryId, String entryPoint) {
 
 		System.out.println("username: " + username);
 		System.out.println("blobBinaryFolderPath: " + blobBinaryFolderPath);
@@ -90,7 +90,7 @@ public class BlobHandler {
 			if (listOfFiles[i].isFile()) {
 				fileName = listOfFiles[i].getName();
 				System.out.println(fileName);
-				insertBinaryMin(username, fileName, blobBinaryFolderPath + "/" + fileName, userSpecificCategoryId);
+				insertBinaryMin(username, fileName, blobBinaryFolderPath + "/" + fileName, userSpecificCategoryId, entryPoint);
 			}
 		}
 	}
@@ -107,7 +107,7 @@ public class BlobHandler {
 	 * @param blobCaption
 	 *            e.g. "Picture of James, when he was skinny."
 	 */
-	public void insertBinaryMin(String username, String blobFileName, String blobBinaryFilePath, int userSpecificCategoryId) {
+	public void insertBinaryMin(String username, String blobFileName, String blobBinaryFilePath, int userSpecificCategoryId, String entryPoint) {
 		String insertStmt = "INSERT INTO document (size, name, description, content_type, max_size, owner, filename, content, category) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		String tableName = getTableName(insertStmt);
 		File blobFile = null;
@@ -122,7 +122,7 @@ public class BlobHandler {
 			int ix = 1;
 			pstmt01.setLong(ix++, blobFile.length());
 			pstmt01.setString(ix++, "Crawled File");
-			pstmt01.setString(ix++, "Crawled File");
+			pstmt01.setString(ix++, "Crawled File from "+entryPoint);
 			pstmt01.setString(ix++, "Unknown");
 			pstmt01.setInt(ix++, 4000000);
 			pstmt01.setString(ix++, username);

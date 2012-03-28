@@ -44,7 +44,7 @@ public interface CrawlerController {
 	 * @param blobBinaryFolderPath		Path of where the spidering results are.
 	 * @param userSpecificCategoryId	Category to assign for these spiderings.
 	 */
-	void storeSpiderResults(String username, String storageFolder, int userSpecificCategoryId);
+	void storeSpiderResults(String username, String storageFolder, int userSpecificCategoryId, String entryPoint);
 
 	/**
 	 * Used for database connection clean up and thing else that needs to happen.

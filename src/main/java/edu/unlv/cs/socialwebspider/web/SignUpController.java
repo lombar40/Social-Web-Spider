@@ -22,6 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import edu.unlv.cs.socialwebspider.domain.Profile;
 import edu.unlv.cs.socialwebspider.domain.User;
 
+/**
+ * Manages the signup of users to the system
+ * 
+ * @author Ryan
+ */
 @RequestMapping("/signup/**")
 @Controller
 public class SignUpController {
@@ -111,22 +116,25 @@ public class SignUpController {
 		mail.setTo(form.getEmailAddress());
 		mail.setSubject("Social Web Spider User Activation");
 		mail.setText("Hi " + form.getUsername() + ",\nThank you for registering with us. Please click on this link to activate your account\nhttp://localhost:8080/socialwebspider/signup?emailAddress=" + form.getEmailAddress() + "&activate=" + activationKey + "\nThanks, Social Web Spider");
+		
+		// Attempts to send the message
 		try
 		{
 			mailSender.send(mail);
 		}
+		// If it fails, throw an error to the user
 		catch(Exception e)
 		{
 			result.rejectValue("emailAddress", "signup_invalidemail");
 			return createForm(model, form);
 		}
 				
-		Profile profile = new Profile();	// Stores profile information
-		User user = new User();				// Stores user information
+		Profile profile = new Profile();				// Stores profile information
+		User user = new User();							// Stores user information
 
-		profile.setVisibility(true);				// Set default visibility to true
-		profile.setUsername(form.getUsername());	// Sets the username
-		profile.persist();							// Add the profile to the database
+		profile.setVisibility(true);					// Set default visibility to true
+		profile.setUsername(form.getUsername());		// Sets the username
+		profile.persist();								// Add the profile to the database
 		
 		user.setUsername(form.getUsername());			// Set the username from the form
 		user.setActivationDate(null);					// Set the activation date to null until activated

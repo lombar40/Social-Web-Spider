@@ -3,6 +3,12 @@ package edu.unlv.cs.socialwebspider.web;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * Form the user fills out when changing password
+ * 
+ * @author Ryan
+ *
+ */
 public class ChangePasswordForm {
 
 	@NotNull

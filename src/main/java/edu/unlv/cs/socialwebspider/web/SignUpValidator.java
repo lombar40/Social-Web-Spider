@@ -10,6 +10,12 @@ import org.springframework.validation.Validator;
 
 import edu.unlv.cs.socialwebspider.domain.User;
 
+/**
+ * Validates that the info entered by the user for their new account is valid.
+ * 
+ * @author Ryan
+ *
+ */
 @Service("signUpValidator")
 public class SignUpValidator implements Validator {
 

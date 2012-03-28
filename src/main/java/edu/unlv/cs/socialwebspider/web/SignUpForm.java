@@ -3,6 +3,12 @@ package edu.unlv.cs.socialwebspider.web;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * The form the user fills out to sign up
+ * 
+ * @author Ryan
+ *
+ */
 public class SignUpForm {
 
 	@NotNull

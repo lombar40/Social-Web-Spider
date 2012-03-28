@@ -4,6 +4,6 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_edu_unlv_cs_socialwebspider_domain_Category" modelAttribute="category" path="/categorys" versionField="Version" z="TP9DySNW7hJsVk7wDgzccrZVm8Q=">
         <field:input field="categoryName" id="c_edu_unlv_cs_socialwebspider_domain_Category_categoryName" min="1" required="true" z="DwL0A8viSqkB9V3rxi/BE+703Go="/>
-        <field:select field="owner" id="c_edu_unlv_cs_socialwebspider_domain_Category_owner" itemValue="id" items="${users}" path="/users" z="ltZjq4F6kvSt4c9x5GEWfasX5Kw="/>
+        <field:select field="owner" id="c_edu_unlv_cs_socialwebspider_domain_Category_owner" itemValue="id" items="${users}" path="/users" render="false" z="user-managed"/>
     </form:update>
 </div>

@@ -31,6 +31,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
+/**
+ * Controller that controls the documents.
+ * 
+ * @author Ernesto
+ *
+ */
 @RooWebScaffold(path = "documents", formBackingObject = Document.class, update=false)
 @RequestMapping("/documents")
 @Controller

@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import edu.unlv.cs.socialwebspider.domain.User;
 import edu.unlv.cs.socialwebspider.provider.DatabaseAuthenticationProvider;
 
+/**
+ * Controller to control changing of a user's password
+ * 
+ * @author Ryan
+ */
 @RequestMapping("/changepassword/**")
 @Controller
 public class ChangePasswordController {

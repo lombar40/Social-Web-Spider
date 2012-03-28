@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.unlv.cs.socialwebspider.domain.User;
 
+/**
+ * Controller that controls the retreival of the user's login information
+ * 
+ * @author Ryan
+ */
 @RequestMapping("/forgotlogin/**")
 @Controller
 public class ForgotLoginController {

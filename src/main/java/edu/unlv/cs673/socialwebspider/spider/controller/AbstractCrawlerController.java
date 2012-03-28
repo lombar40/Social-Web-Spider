@@ -22,8 +22,8 @@ public abstract class AbstractCrawlerController implements CrawlerController {
 	}
 
 	@Override
-	public void storeSpiderResults(String username, String blobBinaryFolderPath, int userSpecificCategoryId) {
-		bh.insertBlobsFromFolder(username, blobBinaryFolderPath, userSpecificCategoryId);
+	public void storeSpiderResults(String username, String blobBinaryFolderPath, int userSpecificCategoryId, String entryPoint) {
+		bh.insertBlobsFromFolder(username, blobBinaryFolderPath, userSpecificCategoryId, entryPoint);
 	}
 
 	@Override

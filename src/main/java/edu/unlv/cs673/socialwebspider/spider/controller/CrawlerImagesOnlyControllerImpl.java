@@ -41,7 +41,7 @@ public class CrawlerImagesOnlyControllerImpl extends AbstractCrawlerController i
 			final int politenessDelay, final String entryPoint, final int minBinarySize) throws Exception {
 		startNewCrawler(configFolder, numberOfCrawlers, storageFolder, maxDepth, politenessDelay, entryPoint, minBinarySize);
 		bh = new BlobHandler();
-		storeSpiderResults(username, storageFolder, userSpecificCategoryId);
+		storeSpiderResults(username, storageFolder, userSpecificCategoryId, entryPoint);
 		finishSpider(configFolder, storageFolder);
 	}
 

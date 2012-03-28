@@ -21,28 +21,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * This controls the management of the categories. Users can view their own categories and view documents inside the category.
+ * @author Ryan
+ *
+ */
 @RequestMapping("/categorys")
 @Controller
 @RooWebScaffold(path = "categorys", formBackingObject = Category.class)
 public class CategoryController {
 	
+	/**
+	 * Shows the user a specific document and links them to the document.
+	 * 
+	 * @param id ID of the document
+	 * @param uiModel MVC model
+	 * @return URL to the jspx
+	 */
 	@RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
-		org.springframework.security.core.userdetails.User authUser = DatabaseAuthenticationProvider.getPrincipal(); // Stores the authenticated user
-		TypedQuery<Document> documentQuery = Document.findDocumentsByCategoryAndOwner(Category.findCategory(id), authUser.getUsername());
-		List<Document> documentList = documentQuery.getResultList();
+		org.springframework.security.core.userdetails.User authUser = DatabaseAuthenticationProvider.getPrincipal(); 						// Stores the authenticated user
+		TypedQuery<Document> documentQuery = Document.findDocumentsByCategoryAndOwner(Category.findCategory(id), authUser.getUsername());	// Stores the document query
+		List<Document> documentList = documentQuery.getResultList();	// Stores the document list
 		
-        uiModel.addAttribute("documents", documentList);
-        uiModel.addAttribute("itemId", id);
+        uiModel.addAttribute("documents", documentList);	// Adds the document list to the model
+        uiModel.addAttribute("itemId", id);					// Adds the documentid to the model
         return "categorys/show";
     }
 	
+	/**
+	 * Shows the user a list of their own categories.
+	 * 
+	 * @param page What page they are on
+	 * @param size What number of categories to view
+	 * @param uiModel MVC model
+	 * @return URL to the jspx
+	 */
 	@RequestMapping(produces = "text/html")
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
 		org.springframework.security.core.userdetails.User authUser = DatabaseAuthenticationProvider.getPrincipal(); 	// Stores the authenticated user
-		TypedQuery<User> userQuery = User.findUsersByUsername(authUser.getUsername());			// Stores the query for the owner of the message
-    	TypedQuery<Category> categoryQuery = Category.findCategorysByOwner(userQuery.getSingleResult());						// Stores the query for only the authenticated user's messages
-    	List<Category> categoryList = categoryQuery.getResultList();																		// Stores the list of the authenticated users's messages
+		TypedQuery<User> userQuery = User.findUsersByUsername(authUser.getUsername());									// Stores the query for the owner of the message
+    	TypedQuery<Category> categoryQuery = Category.findCategorysByOwner(userQuery.getSingleResult());				// Stores the query for only the authenticated user's messages
+    	List<Category> categoryList = categoryQuery.getResultList();													// Stores the list of the authenticated users's messages
         
     	// If specific results are specified set and display only those
         if (page != null || size != null) {
@@ -66,33 +86,77 @@ public class CategoryController {
         return "categorys/list";										// Return the list of messages
     }
 	
+	/**
+	 * Creation of a category
+	 * 
+	 * @param category Returned category information from the user
+	 * @param bindingResult Results from the form (errors)
+	 * @param uiModel The MVC model
+	 * @param httpServletRequest HTTP servlet request
+	 * @return The URL to the jspx
+	 */
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid Category category, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
 		org.springframework.security.core.userdetails.User authUser = DatabaseAuthenticationProvider.getPrincipal(); 	// Stores the authenticated user
-		TypedQuery<User> userQuery = User.findUsersByUsername(authUser.getUsername());			// Stores the query for the owner of the message
+		TypedQuery<User> userQuery = User.findUsersByUsername(authUser.getUsername());									// Stores the query for the owner of the message
 		
+		// Checks if the form has errors
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, category);
             return "categorys/create";
         }
-        category.setOwner(userQuery.getSingleResult());
+        
+        category.setOwner(userQuery.getSingleResult());	// Sets the owner of the category to the logged in user
         uiModel.asMap().clear();
-        category.persist();
+        category.persist();		// Stores the category
         return "redirect:/categorys/" + encodeUrlPathSegment(category.getId().toString(), httpServletRequest);
     }
 	
+	/**
+	 * Updates the category
+	 * 
+	 * @param category Category the user is modifying
+	 * @param bindingResult Results from the form (errors)
+	 * @param uiModel The MVC model
+	 * @param httpServletRequest HTTP servlet request
+	 * @return The URl to the jspx
+	 */
 	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String update(@Valid Category category, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
 		org.springframework.security.core.userdetails.User authUser = DatabaseAuthenticationProvider.getPrincipal(); 	// Stores the authenticated user
-		TypedQuery<User> userQuery = User.findUsersByUsername(authUser.getUsername());			// Stores the query for the owner of the message
+		TypedQuery<User> userQuery = User.findUsersByUsername(authUser.getUsername());									// Stores the query for the owner of the message
 		
+		// Check if the form had errors
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, category);
             return "categorys/update";
         }
-        category.setOwner(userQuery.getSingleResult());
+        
+        category.setOwner(userQuery.getSingleResult());	// Set the owner of the file to the logged in user
         uiModel.asMap().clear();
-        category.merge();
-        return "redirect:/categorys/" + encodeUrlPathSegment(category.getId().toString(), httpServletRequest);
+        category.merge();	// Save the category
+        return "redirect:/categorys/" + encodeUrlPathSegment(category.getId().toString(), httpServletRequest);	// Forward the user to the page they've modified
+    }
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
+    public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+		org.springframework.security.core.userdetails.User authUser = DatabaseAuthenticationProvider.getPrincipal(); 	// Stores the authenticated user
+		Category category = Category.findCategory(id);
+		TypedQuery<Document> documentQuery = Document.findDocumentsByCategoryAndOwner(category, authUser.getUsername());
+		List<Document> documentList = documentQuery.getResultList();
+		if(documentList.size() > 0)
+		{
+			// Error that there are entries in this database
+			uiModel.asMap().clear();
+	        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
+	        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+	        return "redirect:/categorys";
+		}
+		
+        category.remove();
+        uiModel.asMap().clear();
+        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
+        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+        return "redirect:/categorys";
     }
 }

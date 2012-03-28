@@ -6,6 +6,12 @@ import org.springframework.validation.Validator;
 
 import edu.unlv.cs.socialwebspider.provider.DatabaseAuthenticationProvider;
 
+/**
+ * Change password validation. Checks if the entered data is acceptable.
+ * 
+ * @author Ryan
+ *
+ */
 @Service("changePasswordValidator")
 public class ChangePasswordValidator implements Validator {
 

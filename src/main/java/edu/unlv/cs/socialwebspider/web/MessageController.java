@@ -20,6 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Manages messaging between users.
+ * 
+ * @author Ryan
+ *
+ */
 @RequestMapping("/messages")
 @Controller
 @RooWebScaffold(path = "messages", formBackingObject = Message.class)
@@ -66,7 +72,14 @@ public class MessageController {
         return "messages/list";										// Return the list of messages
     }
 	
-	// Modify creation
+	/**
+	 * Creates a new message to the user
+	 * @param message Message the user filled out
+	 * @param bindingResult	Results from the form (errors)
+	 * @param uiModel MVC model
+	 * @param httpServletRequest HTTP servlet request
+	 * @return The URL to the jspx
+	 */
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(Message message, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
 		org.springframework.security.core.userdetails.User authUser = DatabaseAuthenticationProvider.getPrincipal(); 	// Stores the authenticated user

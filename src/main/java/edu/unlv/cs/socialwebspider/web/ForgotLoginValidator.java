@@ -10,6 +10,12 @@ import org.springframework.validation.Validator;
 
 import edu.unlv.cs.socialwebspider.domain.User;
 
+/**
+ * Checks to make sure entered data is acceptable for the forgot login pattern
+ * 
+ * @author Ryan
+ *
+ */
 @Service("forgotLoginValidator")
 public class ForgotLoginValidator implements Validator {
 

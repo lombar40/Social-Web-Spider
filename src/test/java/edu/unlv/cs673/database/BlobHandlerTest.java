@@ -59,7 +59,7 @@ public class BlobHandlerTest {
 			}
 			
 			// Do insert of all binaries of particular folder. Gave unique category id of -1134, so easy to see test.
-			b.insertBlobsFromFolder("testuser", targetDir, -1134);
+			b.insertBlobsFromFolder("testuser", targetDir, -1134, "http://www.funnypix.ca/main.php");
 			
 			assert(true);
 		}catch(Exception e){

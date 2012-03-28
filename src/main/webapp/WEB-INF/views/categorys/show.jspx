@@ -6,8 +6,8 @@
         <table:table data="${documents}" id="l_edu_unlv_cs_socialwebspider_domain_Document" path="/documents" update="false" z="user-managed">
             <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_category" property="category" z="user-managed"/>
             <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_name" property="name" z="user-managed"/>
-            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_description" property="description" z="user-managed"/>
-            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_filename" property="filename" z="user-managed"/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_description" property="description" render="false" z="user-managed"/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_filename" property="filename" render="false" z="user-managed"/>
             <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_owner" property="owner" render="false" z="user-managed"/>
             <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_content" property="content" render="false" z="user-managed"/>
         </table:table>

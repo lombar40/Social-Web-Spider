@@ -15,6 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.ui.Model;
 
+/**
+ * Manages the profile for the user.
+ * 
+ * @author Ryan
+ *
+ */
 @RooWebScaffold(path = "profiles", formBackingObject = Profile.class)
 @RequestMapping("/profiles")
 @Controller
