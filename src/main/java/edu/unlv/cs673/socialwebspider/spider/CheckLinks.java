@@ -183,6 +183,7 @@ public class CheckLinks extends javax.swing.JFrame implements Runnable, ISpiderR
 	 * @param event
 	 *            The event associated with the button.
 	 */
+	@SuppressWarnings("deprecation")
 	final void begin_actionPerformed(final java.awt.event.ActionEvent event) {
 		if (backgroundThread == null) {
 			begin.setLabel("Cancel");

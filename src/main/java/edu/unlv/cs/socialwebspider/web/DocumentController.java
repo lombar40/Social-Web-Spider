@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
+import javax.persistence.TypedQuery;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -105,5 +107,33 @@ public class DocumentController {
     	document.setUrl("http://localhost:8080/doctemplus/documents/showdoc/"+id);
         model.addAttribute("document", document);
         return "documents/update";
+    }
+    
+    @RequestMapping(produces = "text/html")
+    public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+    	org.springframework.security.core.userdetails.User authUser = DatabaseAuthenticationProvider.getPrincipal(); 	// Stores the authenticated user
+    	TypedQuery<Document> documentQuery = Document.findDocumentsByOwnerEquals(authUser.getUsername());			// Stores the query for only the authenticated user's messages
+    	List<Document> documentList = documentQuery.getResultList();																		// Stores the list of the authenticated users's messages
+        
+    	// If specific results are specified set and display only those
+        if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();							// Set the number of entries to show
+            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;	// Set the first result to start from
+            int lastResult = firstResult + sizeNo;										// Set the last result to show
+            
+            // If the last result to show is out of range, set it to the max of the list
+            if(lastResult > documentList.size() - 1)
+            	lastResult = documentList.size();
+            
+            List<Document> documentSubList = documentList.subList(firstResult, lastResult);			// Retrieve the requested sublist of messages
+            uiModel.addAttribute("documents", documentSubList);								// Send the list to the modeler
+            float nrOfPages = (float) documentList.size() / sizeNo;								// Set the number of pages
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));	// Model the number of pages
+            return "documents/list";														// Return the list of messages
+        } 
+        
+        // If no specific size/pages were specified show all.
+        uiModel.addAttribute("documents", documentList);						// Add the messages to the model
+        return "documents/list";										// Return the list of messages
     }
 }

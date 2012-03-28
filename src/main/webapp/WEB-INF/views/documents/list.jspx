@@ -8,8 +8,8 @@
             <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_name" property="name" z="aqJyvpMkbpEo2IddTftXOaOu5u8="/>
             <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_description" property="description" z="7QVHjbmmuRSaSKNnLsHs264Z6CI="/>
             <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_filename" property="filename" z="BL9Zp+9VDAlI92wT4flZQPnobR4="/>
-            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_owner" property="owner" z="TT5UcOYnLnaYmTP7s45tcFWZsOs="/>
-            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_content" render="false" property="content" z="NdNOy6B32qxUp/v9fUkqnZLii2A="/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_owner" property="owner" render="false" z="user-managed"/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_content" property="content" render="false" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

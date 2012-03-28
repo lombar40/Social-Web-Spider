@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_edu_unlv_cs_socialwebspider_domain_Category" items="${categorys}" z="pqydODU3oJxWusrlEXIYk8dKTZs=">
+        <table:table data="${categorys}" id="l_edu_unlv_cs_socialwebspider_domain_Category" path="/categorys" z="2U3H+59hRruefDlHbqDIXl4GYDs=">
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Category_categoryName" property="categoryName" z="x8oVMpqEsVknYEki7W7SKHx5bTY="/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Category_owner" property="owner" render="false" z="user-managed"/>
+        </table:table>
+    </page:list>
+</div>

@@ -3,9 +3,11 @@
 
 package edu.unlv.cs.socialwebspider.web;
 
+import edu.unlv.cs.socialwebspider.domain.Category;
 import edu.unlv.cs.socialwebspider.domain.Document;
 import edu.unlv.cs.socialwebspider.domain.Message;
 import edu.unlv.cs.socialwebspider.domain.Profile;
+import edu.unlv.cs.socialwebspider.domain.Spider;
 import edu.unlv.cs.socialwebspider.domain.User;
 import edu.unlv.cs.socialwebspider.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -16,10 +18,34 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
     
+    public Converter<Category, String> ApplicationConversionServiceFactoryBean.getCategoryToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<edu.unlv.cs.socialwebspider.domain.Category, java.lang.String>() {
+            public String convert(Category category) {
+                return new StringBuilder().append(category.getCategoryName()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Category> ApplicationConversionServiceFactoryBean.getIdToCategoryConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, edu.unlv.cs.socialwebspider.domain.Category>() {
+            public edu.unlv.cs.socialwebspider.domain.Category convert(java.lang.Long id) {
+                return Category.findCategory(id);
+            }
+        };
+    }
+    
+    public Converter<String, Category> ApplicationConversionServiceFactoryBean.getStringToCategoryConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, edu.unlv.cs.socialwebspider.domain.Category>() {
+            public edu.unlv.cs.socialwebspider.domain.Category convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Category.class);
+            }
+        };
+    }
+    
     public Converter<Document, String> ApplicationConversionServiceFactoryBean.getDocumentToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<edu.unlv.cs.socialwebspider.domain.Document, java.lang.String>() {
             public String convert(Document document) {
-                return new StringBuilder().append(document.getMAX_SIZE()).append(" ").append(document.getOwner()).append(" ").append(document.getCategory()).append(" ").append(document.getName()).toString();
+                return new StringBuilder().append(document.getMAX_SIZE()).append(" ").append(document.getOwner()).append(" ").append(document.getName()).append(" ").append(document.getDescription()).toString();
             }
         };
     }
@@ -88,6 +114,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<Spider, String> ApplicationConversionServiceFactoryBean.getSpiderToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<edu.unlv.cs.socialwebspider.domain.Spider, java.lang.String>() {
+            public String convert(Spider spider) {
+                return new StringBuilder().append(spider.getStatus()).append(" ").append(spider.getUrl()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Spider> ApplicationConversionServiceFactoryBean.getIdToSpiderConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, edu.unlv.cs.socialwebspider.domain.Spider>() {
+            public edu.unlv.cs.socialwebspider.domain.Spider convert(java.lang.Long id) {
+                return Spider.findSpider(id);
+            }
+        };
+    }
+    
+    public Converter<String, Spider> ApplicationConversionServiceFactoryBean.getStringToSpiderConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, edu.unlv.cs.socialwebspider.domain.Spider>() {
+            public edu.unlv.cs.socialwebspider.domain.Spider convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Spider.class);
+            }
+        };
+    }
+    
     public Converter<User, String> ApplicationConversionServiceFactoryBean.getUserToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<edu.unlv.cs.socialwebspider.domain.User, java.lang.String>() {
             public String convert(User user) {
@@ -113,6 +163,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     }
     
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
+        registry.addConverter(getCategoryToStringConverter());
+        registry.addConverter(getIdToCategoryConverter());
+        registry.addConverter(getStringToCategoryConverter());
         registry.addConverter(getDocumentToStringConverter());
         registry.addConverter(getIdToDocumentConverter());
         registry.addConverter(getStringToDocumentConverter());
@@ -122,6 +175,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getProfileToStringConverter());
         registry.addConverter(getIdToProfileConverter());
         registry.addConverter(getStringToProfileConverter());
+        registry.addConverter(getSpiderToStringConverter());
+        registry.addConverter(getIdToSpiderConverter());
+        registry.addConverter(getStringToSpiderConverter());
         registry.addConverter(getUserToStringConverter());
         registry.addConverter(getIdToUserConverter());
         registry.addConverter(getStringToUserConverter());

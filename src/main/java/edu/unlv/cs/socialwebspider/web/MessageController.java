@@ -40,7 +40,7 @@ public class MessageController {
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
 		org.springframework.security.core.userdetails.User authUser = DatabaseAuthenticationProvider.getPrincipal(); 	// Stores the authenticated user
     	TypedQuery<Message> query = Message.findMessagesByMessageToEquals(authUser.getUsername());						// Stores the query for only the authenticated user's messages
-    	List<Message> list = query.getResultList();																		// Stores the list of the authenticated users's messages
+    	List<Message> messageList = query.getResultList();																		// Stores the list of the authenticated users's messages
     	
     	// If specific results are specified set and display only those
         if (page != null || size != null) {
@@ -49,19 +49,19 @@ public class MessageController {
             int lastResult = firstResult + sizeNo;										// Set the last result to show
             
             // If the last result to show is out of range, set it to the max of the list
-            if(lastResult > list.size() - 1)
-            	lastResult = list.size();
+            if(lastResult > messageList.size() - 1)
+            	lastResult = messageList.size();
             
-            List<Message> messageList = list.subList(firstResult, lastResult);			// Retrieve the requested sublist of messages
-            uiModel.addAttribute("messages", messageList);								// Send the list to the modeler
-            float nrOfPages = (float) list.size() / sizeNo;								// Set the number of pages
+            List<Message> messageSubList = messageList.subList(firstResult, lastResult);			// Retrieve the requested sublist of messages
+            uiModel.addAttribute("messages", messageSubList);								// Send the list to the modeler
+            float nrOfPages = (float) messageList.size() / sizeNo;								// Set the number of pages
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));	// Model the number of pages
             addDateTimeFormatPatterns(uiModel);											// Format the date and time for the message dates
             return "messages/list";														// Return the list of messages
         } 
         
         // If no specific size/pages were specified show all.
-        uiModel.addAttribute("messages", query.getResultList());	// Add the messages to the model
+        uiModel.addAttribute("messages", messageList);	// Add the messages to the model
         addDateTimeFormatPatterns(uiModel);							// Format the date and time for the message dates
         return "messages/list";										// Return the list of messages
     }
@@ -71,7 +71,7 @@ public class MessageController {
     public String create(Message message, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
 		org.springframework.security.core.userdetails.User authUser = DatabaseAuthenticationProvider.getPrincipal(); 	// Stores the authenticated user
 		String messageFrom = authUser.getUsername();							// Stores the authenticated user's username
-		TypedQuery<User> query = User.findUsersByUsername(messageFrom);			// Stores the query of messages for the authenticated user
+		TypedQuery<User> query = User.findUsersByUsername(messageFrom);			// Stores the query for the owner of the message
 		User messageOwner = null;												// Creates the owner of the message
 		
 		// If the sending user is the root admin, create a user for them

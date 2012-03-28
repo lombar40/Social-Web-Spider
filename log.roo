@@ -205,3 +205,33 @@ finder add findUsersById
 finder add findUsersById
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 00:39:27
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-27 03:34:55
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 17:29:54
+entity jpa --class ~.domain.Category
+field string --fieldName categoryName --notNull --sizeMin 1
+field reference --fieldName owner --type ~.domain.User
+focus --class ~.domain.Message
+finder list
+focus --class ~.domain.Document
+finder list
+finder add findDocumentsByCategoryAndOwner
+focus --class ~.domain.Category
+finder list
+finder add findCategoryByOwner
+finder add findCategorysByOwner
+web mvc scaffold --class ~.domain.Category
+web mvc scaffold --class ~.web.CategoryController
+// [failed] web mvc finder add --formBackingType ~.domain.Document
+// [failed] web mvc finder add --formBackingType ~.web.DocumentController
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-27 18:31:16
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 18:32:30
+focus --class ~.domain.Document
+finder list
+finder add findDocumentsByOwnerEquals
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-27 19:42:37
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 19:44:01
+entity jpa --class ~.domain.Spider
+web mvc scaffold --class ~.web.SpiderController
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-27 19:46:45
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-03-27 19:47:27
+perform clean
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-03-27 19:48:07

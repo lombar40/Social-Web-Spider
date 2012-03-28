@@ -6,8 +6,6 @@ import java.io.*;
 import javax.swing.text.*;
 import javax.swing.text.html.*;
 
-import com.mysql.jdbc.Connection;
-
 /**
  * That class implements a reusable spider
  * 

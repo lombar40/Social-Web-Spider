@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_edu_unlv_cs_socialwebspider_domain_Document" items="${documents}" z="user-managed">
+        <table:table data="${documents}" id="l_edu_unlv_cs_socialwebspider_domain_Document" path="/documents" update="false" z="user-managed">
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_category" property="category" z="user-managed"/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_name" property="name" z="user-managed"/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_description" property="description" z="user-managed"/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_filename" property="filename" z="user-managed"/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_owner" property="owner" render="false" z="user-managed"/>
+            <table:column id="c_edu_unlv_cs_socialwebspider_domain_Document_content" property="content" render="false" z="user-managed"/>
+        </table:table>
+    </page:list>
+    <page:show id="ps_edu_unlv_cs_socialwebspider_domain_Category" object="${category}" path="/categorys" render="false" z="user-managed">
+        <field:display field="categoryName" id="s_edu_unlv_cs_socialwebspider_domain_Category_categoryName" object="${category}" render="false" z="user-managed"/>
+        <field:display field="owner" id="s_edu_unlv_cs_socialwebspider_domain_Category_owner" object="${category}" render="false" z="user-managed"/>
+    </page:show>
+</div>

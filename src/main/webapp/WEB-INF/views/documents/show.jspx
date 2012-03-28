@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_edu_unlv_cs_socialwebspider_domain_Document" object="${document}" path="/documents" update="false" z="user-managed">
-		<field:display field="owner" id="s_edu_unlv_cs_socialwebspider_domain_Document_owner" object="${document}" z="K1rG8fU1svX5x/Bzyv9WfKp5Aio="/>
+        <field:display field="owner" id="s_edu_unlv_cs_socialwebspider_domain_Document_owner" object="${document}" z="K1rG8fU1svX5x/Bzyv9WfKp5Aio="/>
         <field:display field="category" id="s_edu_unlv_cs_socialwebspider_domain_Document_category" object="${document}" z="4X2M2HG/ZCXkb0Q6+4zECZxVODE="/>
         <field:display field="name" id="s_edu_unlv_cs_socialwebspider_domain_Document_name" object="${document}" z="HVpGFeY0oXCLlibnvoF3NjheHhI="/>
         <field:display field="description" id="s_edu_unlv_cs_socialwebspider_domain_Document_description" object="${document}" z="GJT4QXC36mUVo+XlsEPG9KxvttI="/>
@@ -13,11 +13,11 @@
         <field:display field="size" id="s_edu_unlv_cs_socialwebspider_domain_Document_size" object="${document}" z="+TxbAuX4tPlmPQOCHP5/TupPimk="/>
         <field:display field="url" id="s_edu_unlv_cs_socialwebspider_domain_Document_url" object="${document}" render="false" z="user-managed"/>
         <div id="_s_edu_unlv_cs_socialwebspider_domain_Document_url_id">
-        	<label for="_url_id">Url:</label>
-        	<div id="_s_edu_unlv_cs_socialwebspider_domain_Document_url_url_id" class="box">
-        		<a href="${document.url}">Link</a>
-        	</div>
+            <label for="_url_id">Url:</label>
+            <div class="box" id="_s_edu_unlv_cs_socialwebspider_domain_Document_url_url_id">
+                <a href="${document.url}">Link</a>
+            </div>
         </div>
-        <br />
+        <br/>
     </page:show>
 </div>

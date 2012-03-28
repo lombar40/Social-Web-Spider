@@ -106,6 +106,21 @@ public class SignUpController {
 		Random random = new Random(System.currentTimeMillis());	// Generates a random number for use with activation key
 		String activationKey = "" + Math.abs(random.nextInt());	// Sets the activation key
 		
+		// Send e-mail to user with the activation link
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(form.getEmailAddress());
+		mail.setSubject("Social Web Spider User Activation");
+		mail.setText("Hi " + form.getUsername() + ",\nThank you for registering with us. Please click on this link to activate your account\nhttp://localhost:8080/socialwebspider/signup?emailAddress=" + form.getEmailAddress() + "&activate=" + activationKey + "\nThanks, Social Web Spider");
+		try
+		{
+			mailSender.send(mail);
+		}
+		catch(Exception e)
+		{
+			result.rejectValue("emailAddress", "signup_invalidemail");
+			return createForm(model, form);
+		}
+				
 		Profile profile = new Profile();	// Stores profile information
 		User user = new User();				// Stores user information
 
@@ -122,15 +137,7 @@ public class SignUpController {
 		user.setAdmin(false);							// Sets default admin to false
 		user.setProfile(profile);						// Binds the profile to the user
 		user.persist();									// Add the user to the database
-		
-		
-		// Send e-mail to user with the activation link
-		SimpleMailMessage mail = new SimpleMailMessage();
-		mail.setTo(user.getEmailAddress());
-		mail.setSubject("Social Web Spider User Activation");
-		mail.setText("Hi " + user.getUsername() + ",\nThank you for registering with us. Please click on this link to activate your account\nhttp://localhost:8080/socialwebspider/signup?emailAddress=" + user.getEmailAddress() + "&activate=" + activationKey + "\nThanks, Social Web Spider");
-		mailSender.send(mail);
-		
+
 		return "signup/thanks";			
 	}
 }

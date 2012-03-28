@@ -3,6 +3,7 @@
 
 package edu.unlv.cs.socialwebspider.domain;
 
+import edu.unlv.cs.socialwebspider.domain.Category;
 import edu.unlv.cs.socialwebspider.domain.Document;
 
 privileged aspect Document_Roo_JavaBean {
@@ -19,11 +20,11 @@ privileged aspect Document_Roo_JavaBean {
         this.owner = owner;
     }
     
-    public String Document.getCategory() {
+    public Category Document.getCategory() {
         return this.category;
     }
     
-    public void Document.setCategory(String category) {
+    public void Document.setCategory(Category category) {
         this.category = category;
     }
     

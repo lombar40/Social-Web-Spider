@@ -3,6 +3,7 @@
 
 package edu.unlv.cs.socialwebspider.web;
 
+import edu.unlv.cs.socialwebspider.domain.Category;
 import edu.unlv.cs.socialwebspider.domain.Document;
 import edu.unlv.cs.socialwebspider.web.DocumentController;
 import java.io.UnsupportedEncodingException;
@@ -36,20 +37,6 @@ privileged aspect DocumentController_Roo_Controller {
         return "documents/create";
     }
     
-    @RequestMapping(produces = "text/html")
-    public String DocumentController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("documents", Document.findDocumentEntries(firstResult, sizeNo));
-            float nrOfPages = (float) Document.countDocuments() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("documents", Document.findAllDocuments());
-        }
-        return "documents/list";
-    }
-    
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String DocumentController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         Document document = Document.findDocument(id);
@@ -62,6 +49,7 @@ privileged aspect DocumentController_Roo_Controller {
     
     void DocumentController.populateEditForm(Model uiModel, Document document) {
         uiModel.addAttribute("document", document);
+        uiModel.addAttribute("categorys", Category.findAllCategorys());
     }
     
     String DocumentController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
