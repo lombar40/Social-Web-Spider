@@ -82,7 +82,7 @@ public class ForgotLoginController {
 		TypedQuery<User> query = User.findUsersByEmailAddress(emailAddress);	// Stores the query for the user
 		User targetUser = query.getSingleResult();	// Stores the user found with the query
 		Random random = new Random(System.currentTimeMillis());	// Generates a random number
-		String newPassword = "" + (random.nextInt() * -1);	// Sets the string for the new password
+		String newPassword = "" + Math.abs(random.nextInt());	// Sets the string for the new password
 		
 		// If reset is specified
 		if(form.getResetPassword())
